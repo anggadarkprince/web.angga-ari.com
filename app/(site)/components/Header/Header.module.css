@@ -1,0 +1,136 @@
+.header {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+    background-color: var(--body-color);
+}
+
+.scrollHeader {
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.nav {
+    max-width: 968px;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav__logo {
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+}
+.nav__toggle {
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--title-color);
+}
+.nav__menu.show-menu {
+    bottom: 0;
+}
+.nav__list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+.nav__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: var(--small-font-size);
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+    transition: 0.1s color;
+}
+.nav__link:hover {
+    color: var(--primary-color);
+}
+.nav__icon {
+    font-size: 1.2rem;
+}
+.nav__controls {
+    display: flex;
+    align-items: center;
+}
+.nav__actionLink {
+    font-size: 1.25rem;
+    color: var(--title-color);
+    margin-right: var(--size-1);
+    transition: 0.4s;
+}
+.changeTheme {
+    cursor: pointer;
+}
+a.nav__actionLink:hover {
+    color: var(--primary-color);
+}
+.activeLink {
+    color: var(--primary-color);
+}
+.nav__close {
+    position: absolute;
+    right: 1.3rem;
+    bottom: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--container-color);
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 2rem;
+}
+
+@media screen and (max-width: 350px) {
+    .nav__menu {
+        padding: 2rem 0.25rem 4rem;
+    }
+}
+
+@media screen and (min-width: 568px){
+    .nav__list {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1.4rem;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .nav__menu {
+        position: fixed;
+        bottom: -100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--body-color);
+        padding: 2rem 1rem 3.2rem;
+        box-shadow: 0 -1px 20px rgba(0, 0, 0, 0.15);
+        border-radius: 1.5rem 1.5rem 0 0;
+        transition: 0.3s;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    .header {
+        top: 0;
+        bottom: initial;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .nav {
+        height: calc(var(--header-height) + 1rem);
+        column-gap: 1rem;
+    }
+
+    .nav__list {
+        display: flex;
+        column-gap: 2rem;
+    }
+    .nav__icon,
+    .nav__close,
+    .nav__toggle {
+        display: none;
+    }
+}

@@ -1,0 +1,14 @@
+.expertise__group {
+    display: flex;
+}
+.expertise__icon {
+    font-size: var(--h1-font-size);
+    color: var(--primary-color);
+    margin-right: 15px;
+}
+.expertise__header {
+    margin-bottom: var(--size-1-5);
+}
+.expertise__subtitle {
+    font-size: var(--small-font-size);
+}

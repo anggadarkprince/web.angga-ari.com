@@ -1,0 +1,23 @@
+.expertise__item {
+    margin-bottom: var(--size-1);
+}
+.expertise__level {
+    margin-top: 5px;
+}
+.expertise__levelItem {
+    margin-left: 5px;
+}
+.expertise__levelItem:first-child {
+    margin-left: 0;
+}
+.circleFilled,
+.circleMuted {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    display: inline-block;
+}
+.circleMuted {
+    background: var(--primary-color-lighter);
+}

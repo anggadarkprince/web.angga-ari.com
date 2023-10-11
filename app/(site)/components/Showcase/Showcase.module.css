@@ -1,0 +1,61 @@
+.showcase__container {
+    max-width: 986px;
+    gap: 2.5rem;
+}
+
+.showcase__moreButton {
+    display: flex;
+    justify-content: center;
+    font-size: var(--h2-font-size);
+    background: var(--secondary-color);
+}
+
+.showcase__moreButton:hover {
+    background: var(--secondary-color-alt);
+}
+
+.showcase__moreButton small {
+    display: none;
+    font-size: var(--smaller-font-size);
+    color: var(--secondary-color-lighter);
+    font-weight: var(--font-regular);
+}
+
+@media screen and (min-width: 568px) {
+    .showcase__container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .showcase__moreButton {
+        flex-direction: column;
+        height: 270px;
+        position: relative;
+        z-index: 0;
+    }
+
+    .showcase__more-button::before {
+        position: absolute;
+        content: '';
+        border-radius: 0.4rem;
+        background-image: url("/assets/img/wave.png");
+        background-position: bottom center;
+        width: 100%;
+        height: 50%;
+        bottom: 0;
+        left: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: .1;
+        z-index: -1;
+    }
+
+    .showcase__more-button small {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .showcase__container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

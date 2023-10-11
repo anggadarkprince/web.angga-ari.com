@@ -1,0 +1,92 @@
+.contact__container {
+    margin-bottom: var(--size-2);
+}
+.contact__informationWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    text-align: center;
+}
+.contact__information {
+    margin-bottom: var(--size-1-5);
+}
+.contact__icon {
+    color: var(--primary-color);
+    font-size: var(--h1-font-size);
+    line-height: var(--size-1-5);
+}
+.contact__title {
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+}
+.contact__subtitle {
+    color: var(--text-color);
+    font-size: var(--smaller-font-size);
+}
+.contact__form.grid,
+.contact__inputs.grid {
+    gap: var(--size-1);
+}
+.contact__inputButton {
+    text-align: center;
+}
+.contact__inputGroup {
+    margin-bottom: var(--size-1);
+}
+.contact__label {
+    margin-bottom: var(--size-0-25);
+    display: block;
+    color: var(--title-color);
+}
+.contact__input {
+    background-color: var(--input-color);
+    border-radius: 0.4rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    color: var(--text-color);
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    border: 2px solid transparent;
+    outline: none;
+    transition: 0.2s;
+}
+.contact__input:focus {
+    border-color: var(--primary-color);
+}
+.contact__input::placeholder {
+    color: var(--text-color-light);
+}
+.contact__input:disabled,
+.contact__input.disabled,
+fieldset:disabled .contact__input {
+    background-color: var(--container-color-light);
+}
+
+@media screen and (min-width: 568px){
+    .contact__container {
+        grid-template-columns: 3fr 5fr;
+    }
+    .contact__informationWrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, min-content);
+        text-align: left;
+        gap: 0;
+    }
+    .contact__subtitle {
+        font-size: var(--normal-font-size);
+    }
+    .contact__inputButton {
+        text-align: left;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .contact__form.grid,
+    .contact__inputs.grid {
+        gap: var(--size-1-5);
+    }
+
+    .contact__inputs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
