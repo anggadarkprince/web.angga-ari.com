@@ -1,9 +1,10 @@
 import styles from './Contact.module.css';
 import {clsx} from "clsx";
+import {ForwardedRef, forwardRef} from "react";
 
-export const Contact = () => {
+export const Contact = forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
     return (
-        <section className="section" id="contact">
+        <section className="section" id="contact" ref={ref}>
             <h1 className="section__title">Contact Me</h1>
             <h3 className="section__subtitle">Don&apos;t hesitate to get in touch</h3>
 
@@ -72,4 +73,5 @@ export const Contact = () => {
             </div>
         </section>
     );
-}
+});
+Contact.displayName = 'Contact';

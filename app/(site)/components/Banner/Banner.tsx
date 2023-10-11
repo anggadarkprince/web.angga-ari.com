@@ -1,10 +1,12 @@
 import styles from './Banner.module.css';
 import Image from "next/image";
 import {clsx} from "clsx";
+import {ForwardedRef, forwardRef} from "react";
+import {Expertise} from "@/app/(site)/components/Expertise/Expertise";
 
-export const Banner = () => {
+export const Banner = forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
     return (
-        <section className="section" id="home">
+        <section className="section" id="home" ref={ref}>
             <div className={clsx(styles.home__container, 'container grid')}>
                 <Image src="/assets/img/profile.jpg" width={200} height={200} alt="Angga Ari Wijaya" className={clsx(styles.home__photo)} />
                     <div className={clsx(styles.home__description)}>
@@ -22,4 +24,5 @@ export const Banner = () => {
             </div>
         </section>
     );
-};
+});
+Banner.displayName = 'Banner';

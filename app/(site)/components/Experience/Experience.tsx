@@ -1,6 +1,7 @@
 import styles from './Experience.module.css';
 import {clsx} from "clsx";
 import {ExperienceItem} from "@/app/(site)/components/Experience/ExperienceItem";
+import {ForwardedRef, forwardRef} from "react";
 
 const experiences = [
     {
@@ -34,9 +35,9 @@ const experiences = [
     },
 ];
 
-export const Experience = () => {
+export const Experience = forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
     return (
-        <section className="section" id="experience">
+        <section className="section" id="experience" ref={ref}>
             <h1 className="section__title">Experiences</h1>
             <h3 className="section__subtitle">My qualification and journey</h3>
 
@@ -54,4 +55,5 @@ export const Experience = () => {
             </div>
         </section>
     )
-}
+});
+Experience.displayName = 'Experience';

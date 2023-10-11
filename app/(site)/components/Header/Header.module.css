@@ -26,8 +26,10 @@
     font-size: 1.1rem;
     cursor: pointer;
     color: var(--title-color);
+    background: none;
+    border: none;
 }
-.nav__menu.show-menu {
+.nav__menu.showMenu {
     bottom: 0;
 }
 .nav__list {
@@ -76,6 +78,7 @@ a.nav__actionLink:hover {
     cursor: pointer;
     color: var(--container-color);
     background-color: var(--primary-color);
+    border: none;
     border-radius: 50%;
     width: 2rem;
     height: 2rem;

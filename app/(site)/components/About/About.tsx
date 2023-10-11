@@ -1,10 +1,11 @@
 import styles from './About.module.css';
 import {clsx} from "clsx";
 import Link from "next/link";
+import {ForwardedRef, forwardRef} from "react";
 
-export const About = () => {
+export const About = forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
     return (
-        <section className="section" id="about">
+        <section className="section" id="about" ref={ref}>
             <h2 className="section__title">About Me</h2>
             <h3 className="section__subtitle">Welcome to my world</h3>
             <div className={clsx(styles.about__container, 'container grid')}>
@@ -63,4 +64,5 @@ export const About = () => {
             </div>
         </section>
     );
-}
+});
+About.displayName = 'About';

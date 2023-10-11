@@ -1,6 +1,8 @@
 import styles from './Expertise.module.css';
 import {clsx} from "clsx";
 import {ExpertiseSection} from "@/app/(site)/components/Expertise/ExpertiseSection";
+import {ForwardedRef, forwardRef} from "react";
+import {About} from "@/app/(site)/components/About/About";
 
 const expertises = [
     {
@@ -77,9 +79,9 @@ const expertises = [
         ],
     },
 ]
-export const Expertise = () => {
+export const Expertise = forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
     return (
-        <section className="section" id="expertise">
+        <section className="section" id="expertise" ref={ref}>
             <h1 className="section__title">Expertise</h1>
             <h3 className="section__subtitle">My technical level</h3>
 
@@ -95,4 +97,5 @@ export const Expertise = () => {
             </div>
         </section>
     );
-}
+});
+Expertise.displayName = 'Expertise';
