@@ -3,9 +3,11 @@
 import styles from './Header.module.css';
 import {clsx} from "clsx";
 import Link from "next/link";
-import {RefObject, useEffect, useState} from "react";
+import {RefObject, useContext, useEffect, useState} from "react";
+import {ThemeContext, useTheme} from "@/app/context/ThemeContext";
 
 export const Header = ({sections}: {sections: RefObject<HTMLElement>[]}) => {
+    const {theme, setTheme} = useTheme();
     const [isOpen, setIsOpen] = useState(false);
     const [menuActive, setMenuActive] = useState('home');
 
@@ -22,7 +24,6 @@ export const Header = ({sections}: {sections: RefObject<HTMLElement>[]}) => {
                     setMenuActive(sectionId || '');
                 }
             });
-            console.log(menuActive);
         };
         window.addEventListener('scroll', handleScroll);
 
@@ -81,7 +82,7 @@ export const Header = ({sections}: {sections: RefObject<HTMLElement>[]}) => {
                     </button>
                 </div>
                 <div className={styles.nav__controls}>
-                    <i className={clsx(styles.nav__actionLink, styles.changeTheme, 'uil-moon')} id="theme-button"></i>
+                    <i className={clsx(styles.nav__actionLink, styles.changeTheme, theme == 'light' ? 'uil-moon' : 'uil-sun')} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark', true)}></i>
                     <Link href="https://github.com/anggadarkprince/anggadarkprince.github.io" className={styles.nav__actionLink} target="_blank">
                         <i className="uil-github"></i>
                     </Link>
