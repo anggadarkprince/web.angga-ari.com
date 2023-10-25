@@ -1,0 +1,125 @@
+datasource db {
+  provider = "mysql"
+  url = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+  username String @unique @db.VarChar(50)
+  email String @unique @db.VarChar(50)
+  password String
+  avatar String?
+  isActive Boolean @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  profile Profile?
+  experiences Experience[]
+  expertises Expertise[]
+  showcases Showcase[]
+
+  @@map("users")
+}
+
+model Profile {
+  id Int @id @default(autoincrement())
+  userId Int @unique @map("user_id")
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  fullName String @map("full_name")
+  title String
+  location String
+  tagline String
+  about String @db.Text
+  experienceYears Int @map("experience_years")
+  completedProjects Int @map("completed_projects")
+  learningHours Int @map("learning_hours")
+  emailAddress String @map("email_address")
+  website String @map("website")
+  githubUsername String? @map("github_username")
+  githubUrl String? @map("github_url")
+  twitterUrl String? @map("twitter_url")
+  instagramUrl String? @map("instagram_url")
+  linkedinUrl String? @map("linkedin_url")
+  phone String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@map("profiles")
+}
+
+model Experience {
+  id Int @id @default(autoincrement())
+  userId Int @map("user_id")
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  label String @db.VarChar(50)
+  title String @db.VarChar(200)
+  subtitle String @db.VarChar(200)
+  url String?
+  from DateTime
+  to DateTime?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@index([label, title])
+  @@map("experiences")
+}
+
+model Expertise {
+  id Int @id @default(autoincrement())
+  userId Int @map("user_id")
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  sectionId Int? @map("section_id")
+  section Expertise? @relation("SectionExpertises", fields: [sectionId], references: [id])
+  expertises Expertise[] @relation("SectionExpertises")
+  title String @db.VarChar(50)
+  subtitle String @db.VarChar(100)
+  icon String? @db.VarChar(100)
+  level Int @db.TinyInt() @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@index([title])
+  @@map("expertises")
+}
+
+model Showcase {
+  id Int @id @default(autoincrement())
+  userId Int @map("user_id")
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  slug String @unique @db.VarChar(200)
+  title String @db.VarChar(100)
+  subtitle String @db.VarChar(200)
+  url String? @db.VarChar(300)
+  image String? @db.VarChar(300)
+  order Int @db.TinyInt() @default(0)
+  status ShowcaseStatus @default(active)
+  description String @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  showcasePhotos ShowcasePhoto[]
+
+  @@index([title, order])
+  @@map("showcases")
+}
+
+enum ShowcaseStatus {
+  active
+  inactive
+}
+
+model ShowcasePhoto {
+  id Int @id @default(autoincrement())
+  showcaseId Int @map("showcase_id")
+  showcase Showcase @relation(fields: [showcaseId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  photo_title String @db.VarChar(100)
+  src String @db.VarChar(200)
+  order Int @db.TinyInt() @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([photo_title, order])
+  @@map("showcase_photos")
+}

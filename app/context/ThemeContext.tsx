@@ -14,7 +14,7 @@ export function ThemeContextProvider({theme, children}: PropsWithChildren<{theme
 
   const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? "dark" : "light";
 
-  const setTheme = useCallback((theme: 'dark' | 'light', rememberSelection: boolean = false) => {
+  const setTheme = useCallback((theme: 'dark' | 'light', rememberSelection: boolean = true) => {
     setIsDarkTheme(theme === 'dark');
     document.body.classList[theme === "dark" ? "add" : "remove"](darkTheme);
     if (rememberSelection) {
@@ -35,22 +35,22 @@ export function ThemeContextProvider({theme, children}: PropsWithChildren<{theme
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
         const newColorScheme = event.matches ? "dark" : "light";
         console.log(`Switch to ${newColorScheme} theme`);
-        setTheme(newColorScheme, true);
+        setTheme(newColorScheme);
       });
 
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         console.log('Prefer to dark theme');
-        setTheme('dark', true);
+        setTheme('dark');
       }
 
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
         console.log('Prefer to light theme');
-        setTheme('light', true);
+        setTheme('light');
       }
     } else {
       if (isDarkTheme && selectedTheme == 'light') {
-        console.log('a')
-        setTheme(selectedTheme as 'dark' | 'light', true);
+        console.log('Switch to light from dark')
+        setTheme(selectedTheme as 'dark' | 'light');
       }
     }
   }, [isDarkTheme, setTheme]);

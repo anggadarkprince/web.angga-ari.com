@@ -1,8 +1,12 @@
 import styles from './Contact.module.css';
 import {clsx} from "clsx";
 import {ForwardedRef, forwardRef} from "react";
+import {ProfileType} from "@/app/types";
 
-export const Contact = forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
+interface ContactProps {
+    profile: ProfileType | null
+}
+export const Contact = forwardRef(({profile}: ContactProps, ref: ForwardedRef<HTMLElement>) => {
     return (
         <section className="section" id="contact" ref={ref}>
             <h1 className="section__title">Contact Me</h1>
@@ -14,28 +18,28 @@ export const Contact = forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
                         <i className={clsx(styles.contact__icon, 'uil-phone')}></i>
                         <div>
                             <h3 className={styles.contact__title}>Call Me</h3>
-                            <span className={styles.contact__subtitle}>+6285655479868</span>
+                            <span className={styles.contact__subtitle}>{profile?.phone}</span>
                         </div>
                     </div>
                     <div className={styles.contact__information}>
                         <i className={clsx(styles.contact__icon, 'uil-envelope')}></i>
                         <div>
                             <h3 className={styles.contact__title}>Email</h3>
-                            <span className={styles.contact__subtitle}>angga.aw92@gmail.com</span>
+                            <span className={styles.contact__subtitle}>{profile?.emailAddress}</span>
                         </div>
                     </div>
                     <div className={styles.contact__information}>
                         <i className={clsx(styles.contact__icon, 'uil-map-marker')}></i>
                         <div>
                             <h3 className={styles.contact__title}>Location</h3>
-                            <span className={styles.contact__subtitle}>Surabaya, Indonesia</span>
+                            <span className={styles.contact__subtitle}>{profile?.location}</span>
                         </div>
                     </div>
                     <div className={styles.contact__information}>
                         <i className={clsx(styles.contact__icon, 'uil-github-alt')}></i>
                         <div>
                             <h3 className={styles.contact__title}>Github</h3>
-                            <span className={styles.contact__subtitle}>@anggadarkprince</span>
+                            <span className={styles.contact__subtitle}>{profile?.githubUsername}</span>
                         </div>
                     </div>
                 </div>

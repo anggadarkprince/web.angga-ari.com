@@ -3,10 +3,15 @@
 import styles from './Header.module.css';
 import {clsx} from "clsx";
 import Link from "next/link";
-import {RefObject, useContext, useEffect, useState} from "react";
-import {ThemeContext, useTheme} from "@/app/context/ThemeContext";
+import {RefObject, useEffect, useState} from "react";
+import {useTheme} from "@/app/context/ThemeContext";
+import {ProfileType} from "@/app/types";
 
-export const Header = ({sections}: {sections: RefObject<HTMLElement>[]}) => {
+interface HeaderProps {
+    sections: RefObject<HTMLElement>[],
+    profile: ProfileType | null
+}
+export const Header = ({sections, profile}: HeaderProps) => {
     const {theme, setTheme} = useTheme();
     const [isOpen, setIsOpen] = useState(false);
     const [menuActive, setMenuActive] = useState('home');
@@ -41,40 +46,40 @@ export const Header = ({sections}: {sections: RefObject<HTMLElement>[]}) => {
                 <div className={clsx(styles.nav__menu, isOpen && styles.showMenu)}>
                     <ul className={clsx([styles.nav__list, 'grid'])}>
                         <li>
-                            <a href="#home" className={clsx(styles.nav__link, menuActive === 'home' && styles.activeLink)} onClick={() => setIsOpen(false)}>
+                            <Link href="#home" className={clsx(styles.nav__link, menuActive === 'home' && styles.activeLink)} onClick={() => setIsOpen(false)}>
                                 <i className={clsx([styles.nav__icon, 'uil-estate'])}></i>
                                 Home
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#about" className={clsx(styles.nav__link, menuActive === 'about' && styles.activeLink)} onClick={() => setIsOpen(false)}>
+                            <Link href="#about" className={clsx(styles.nav__link, menuActive === 'about' && styles.activeLink)} onClick={() => setIsOpen(false)}>
                                 <i className={clsx(styles.nav__icon, 'uil-user')}></i>
                                 About
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#expertise" className={clsx(styles.nav__link, menuActive === 'expertise' && styles.activeLink)} onClick={() => setIsOpen(false)}>
+                            <Link href="#expertise" className={clsx(styles.nav__link, menuActive === 'expertise' && styles.activeLink)} onClick={() => setIsOpen(false)}>
                                 <i className={clsx(styles.nav__icon, 'uil-file-alt')}></i>
                                 Expertise
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#experience" className={clsx(styles.nav__link, menuActive === 'experience' && styles.activeLink)} onClick={() => setIsOpen(false)}>
+                            <Link href="#experience" className={clsx(styles.nav__link, menuActive === 'experience' && styles.activeLink)} onClick={() => setIsOpen(false)}>
                                 <i className={clsx(styles.nav__icon, 'uil-bag')}></i>
                                 Experiences
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#showcase" className={clsx(styles.nav__link, menuActive === 'showcase' && styles.activeLink)} onClick={() => setIsOpen(false)}>
+                            <Link href="#showcase" className={clsx(styles.nav__link, menuActive === 'showcase' && styles.activeLink)} onClick={() => setIsOpen(false)}>
                                 <i className={clsx(styles.nav__icon, 'uil-image-plus')}></i>
                                 Showcase
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#contact" className={clsx(styles.nav__link, menuActive === 'contact' && styles.activeLink)} onClick={() => setIsOpen(false)}>
+                            <Link href="#contact" className={clsx(styles.nav__link, menuActive === 'contact' && styles.activeLink)} onClick={() => setIsOpen(false)}>
                                 <i className={clsx(styles.nav__icon, 'uil-at')}></i>
                                 Contact
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     <button type="button" className={styles.nav__close} onClick={() => setIsOpen(false)}>
@@ -83,9 +88,11 @@ export const Header = ({sections}: {sections: RefObject<HTMLElement>[]}) => {
                 </div>
                 <div className={styles.nav__controls}>
                     <i className={clsx(styles.nav__actionLink, styles.changeTheme, theme == 'light' ? 'uil-moon' : 'uil-sun')} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark', true)}></i>
-                    <Link href="https://github.com/anggadarkprince/anggadarkprince.github.io" className={styles.nav__actionLink} target="_blank">
-                        <i className="uil-github"></i>
-                    </Link>
+                    {profile?.githubUrl && (
+                        <a href={profile?.githubUrl} className={styles.nav__actionLink} target="_blank">
+                            <i className="uil-github"></i>
+                        </a>
+                    )}
                     <button type="button" className={styles.nav__toggle} onClick={() => setIsOpen(!isOpen)}>
                         <i className="uil-apps"></i>
                     </button>

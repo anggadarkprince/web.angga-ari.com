@@ -1,9 +1,13 @@
 import styles from './About.module.css';
 import {clsx} from "clsx";
-import Link from "next/link";
+import parse from 'html-react-parser';
 import {ForwardedRef, forwardRef} from "react";
+import {ProfileType} from "@/app/types";
 
-export const About = forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
+interface AboutProps {
+    profile: ProfileType | null
+}
+export const About = forwardRef(({profile}: AboutProps, ref: ForwardedRef<HTMLElement>) => {
     return (
         <section className="section" id="about" ref={ref}>
             <h2 className="section__title">About Me</h2>
@@ -12,46 +16,40 @@ export const About = forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
                 <ul className={styles.about__info}>
                     <li className={styles.about__infoItem}>
                         <p className={styles.about__infoLabel}>Name</p>
-                        <h3 className={styles.about__infoValue}>Angga Ari Wijaya</h3>
+                        <h3 className={styles.about__infoValue}>{profile?.fullName}</h3>
                     </li>
                     <li className={styles.about__infoItem}>
                         <p className={styles.about__infoLabel}>Location</p>
-                        <h3 className={styles.about__infoValue}>Surabaya, Indonesia</h3>
+                        <h3 className={styles.about__infoValue}>{profile?.location}</h3>
                     </li>
                     <li className={styles.about__infoItem}>
                         <p className={styles.about__infoLabel}>Email Address</p>
-                        <a href="mailto:angga.aw92@gmail.com" className={styles.about__infoValue}>
-                            angga.aw92@gmail.com <i className="uil-external-link-alt color-primary"></i>
+                        <a href={`mailto:${profile?.emailAddress}`} className={styles.about__infoValue}>
+                            {profile?.emailAddress} <i className="uil-external-link-alt color-primary"></i>
                         </a>
                     </li>
                     <li className={styles.about__infoItem}>
                         <p className={styles.about__infoLabel}>Website</p>
-                        <Link href="https://angga-ari.com" className={styles.about__infoValue}>
-                            https://angga-ari.com <i className="uil-external-link-alt color-primary"></i>
-                        </Link>
+                        <a href={profile?.website} className={styles.about__infoValue}>
+                            {profile?.website} <i className="uil-external-link-alt color-primary"></i>
+                        </a>
                     </li>
                 </ul>
                 <div>
                     <p className={styles.about__description}>
-                        With several years of experience in the field, I possess a deep understanding of <strong>software
-                        development</strong>, architecture, and design. My expertise includes <strong>full-stack development</strong>, object-oriented programming, and
-                        database management.
+                        {parse(profile?.about || '')}
                     </p>
-                    <div className={styles.about__description}>
-                        I am always eager to explore new technologies and techniques to enhance my skills and
-                        <strong>stay up-to-date</strong> with the latest trends in the industry.
-                    </div>
                     <div className={styles.about__stats}>
                         <div>
-                            <p className={styles.about__infoTitle}>06+</p>
+                            <p className={styles.about__infoTitle}>{profile?.experienceYears}+</p>
                             <p className={styles.about__infoName}>Years <br/> experience</p>
                         </div>
                         <div>
-                            <p className={styles.about__infoTitle}>20+</p>
+                            <p className={styles.about__infoTitle}>{profile?.completedProjects}+</p>
                             <p className={styles.about__infoName}>Completed <br/> project</p>
                         </div>
                         <div>
-                            <p className={styles.about__infoTitle}>10+</p>
+                            <p className={styles.about__infoTitle}>{profile?.learningHours}+</p>
                             <p className={styles.about__infoName}>Hours <br/> learning / week</p>
                         </div>
                     </div>

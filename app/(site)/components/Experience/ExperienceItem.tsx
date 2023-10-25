@@ -18,9 +18,9 @@ export const ExperienceItem = ({label, title, subtitle, from, to, url, position 
             <h3 className={styles.experience__title}>{title}</h3>
             <p className={styles.experience__subtitle}>
                 {url ? (
-                    <Link href={url} className="experience__subtitle">
+                    <a href={url} className="experience__subtitle" target="_blank">
                         {subtitle} <i className="uil-external-link-alt color-primary"></i>
-                    </Link>
+                    </a>
                 ) : subtitle}
             </p>
             <p className={styles.experience__period}>

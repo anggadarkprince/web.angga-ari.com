@@ -5,7 +5,7 @@ import {clsx} from "clsx";
 interface ExpertiseSectionProps {
     title: string,
     subtitle: string,
-    icon: string,
+    icon?: string | null,
     expertises: ExpertiseItemProps[],
 }
 

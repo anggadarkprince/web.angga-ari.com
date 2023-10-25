@@ -3,35 +3,13 @@ import {clsx} from "clsx";
 import {ShowcaseItem} from "@/app/(site)/components/Showcase/ShowcaseItem";
 import {ForwardedRef, forwardRef} from "react";
 import {Project} from "@/app/(site)/components/Project/Project";
+import {ShowcaseType} from "@/app/types";
+import Link from "next/link";
 
-const showcases = [
-  {
-    title: 'Info Gue Website',
-    subtitle: 'Web Development',
-    image: '/assets/img/showcase/infogue-web.jpg',
-  },
-  {
-    title: 'Orion Note App',
-    subtitle: 'UI/UX Design',
-    image: '/assets/img/showcase/orion.jpg',
-  },
-  {
-    title: 'Jagamana',
-    subtitle: 'Website Development',
-    image: '/assets/img/showcase/jagamana.jpg',
-  },
-  {
-    title: 'Info Gue Mobile',
-    subtitle: 'Android Development',
-    image: '/assets/img/showcase/infogue-mobile.jpg',
-  },
-  {
-    title: 'The Banna',
-    subtitle: 'Game Development',
-    image: '/assets/img/showcase/the-banna.jpg',
-  },
-]
-export const Showcase = forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
+interface ShowcaseProps {
+  showcases: ShowcaseType[]
+}
+export const Showcase = forwardRef(({showcases}: ShowcaseProps, ref: ForwardedRef<HTMLElement>) => {
   return (
     <>
       <section className="section" id="showcase" ref={ref}>
@@ -40,15 +18,17 @@ export const Showcase = forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
         <div className={clsx(styles.showcase__container, 'container grid')}>
           {showcases.map(showcase => (
             <ShowcaseItem
-              key={showcase.title}
+              key={showcase.slug}
+              slug={showcase.slug}
               title={showcase.title}
               subtitle={showcase.subtitle}
+              url={showcase.url}
               image={showcase.image}/>
           ))}
-          <a href="#" className={clsx(styles.showcase__moreButton, 'button button--flex')}>
+          <Link href="/showcases" className={clsx(styles.showcase__moreButton, 'button button--flex')}>
             See More...
             <small>More projects already completed</small>
-          </a>
+          </Link>
         </div>
       </section>
       <Project/>
