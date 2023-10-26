@@ -246,6 +246,9 @@ fieldset:disabled .button {
 .mb-3 {
   margin-bottom: var(--size-3) !important;
 }
+.mt-0-5 {
+  margin-top: var(--size-0-5) !important;
+}
 .mt-1 {
   margin-top: var(--size-1) !important;
 }
@@ -294,11 +297,17 @@ fieldset:disabled .button {
 .pl-3 {
   padding-left: var(--size-3) !important;
 }
+.display-flex {
+  display: flex;
+}
 .display-block {
   display: block;
 }
 .display-inline-block {
   display: inline-block;
+}
+.align-item-center {
+  align-items: center;
 }
 .width-full {
   width: 100%;
@@ -314,6 +323,9 @@ fieldset:disabled .button {
 }
 .text-washout {
   color: var(--text-color-lighter);
+}
+.text-error {
+  color: var(--error-color);
 }
 .gap-1 {
   gap: var(--size-1) !important;

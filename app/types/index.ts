@@ -10,3 +10,21 @@ export interface ShowcaseType extends Prisma.ShowcaseGetPayload<{
   include: {showcasePhotos: true}
 }>{}
 export interface ShowcasePhotoType extends Prisma.ShowcasePhotoGetPayload<{}>{}
+export interface ContactType extends Prisma.ContactGetPayload<{}>{}
+
+export interface ApiError {
+  [name: string | number]: string | string[]
+}
+export interface ApiResponse<T> {
+  code?: number,
+  status?: string,
+  message?: string,
+  data?: null | Array<T> | T,
+  errors: ApiError | string
+}
+export interface FormResult<T = any> {
+  type?: string | null,
+  status?: string | null,
+  message?: string | null,
+  response?: ApiResponse<T>,
+}
