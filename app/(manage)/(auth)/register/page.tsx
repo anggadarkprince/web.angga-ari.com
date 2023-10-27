@@ -4,6 +4,7 @@ import {clsx} from "clsx";
 import {Input, InputGroup} from "@/app/components/Form/Input";
 import {Button, ButtonLink} from "@/app/components/Form/Button";
 import Image from "next/image";
+import {RegisterForm} from "@/app/(manage)/(auth)/register/components/RegisterForm";
 
 export default async function Login() {
   return (
@@ -17,20 +18,7 @@ export default async function Login() {
           </div>
         </div>
 
-        <div className="alert alert-error" style={{display: 'none'}}>
-          Your password do not match
-        </div>
-
-        <form className={styles.auth__form} method="post">
-          <fieldset>
-            <Input type={'text'} name={'name'} label={'Full Name'} placeholder={'Your full name'} id={'input-name'} required={true} maxLength={50} />
-            <Input type={'text'} name={'username'} label={'Username'} placeholder={'Username or email address'} id={'input-username'} required={true} maxLength={50} />
-            <Input type={'email'} name={'email'} label={'Email Address'} placeholder={'Email address'} id={'input-email'} required={true} maxLength={50} />
-            <Input type={'password'} name={'password'} label={'Password'} placeholder={'Password'} id={'input-password'} required={true} maxLength={50} />
-            <Input type={'password'} name={'password_confirmation'} label={'Confirm Password'} placeholder={'Repeat the password'} id={'input-password-confirmation'} required={true} maxLength={50} />
-            <Button type={'submit'} className={'width-full'}>Sign Up</Button>
-          </fieldset>
-        </form>
+        <RegisterForm />
 
         <p className={clsx('mb-1 mt-1', styles.separator__or)}>OR</p>
 

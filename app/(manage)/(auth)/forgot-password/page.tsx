@@ -1,8 +1,6 @@
 import Link from "next/link";
 import styles from '../page.module.css';
 import {clsx} from "clsx";
-import {Input} from "@/app/components/Form/Input";
-import {Button} from "@/app/components/Form/Button";
 import {ForgotPasswordForm} from "@/app/(manage)/(auth)/forgot-password/components/ForgotPasswordForm";
 
 export default async function ForgotPassword() {

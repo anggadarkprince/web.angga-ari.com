@@ -16,10 +16,32 @@ export const LoginForm = ({referer = ''}: {referer?: string}) => {
           The password successfully reset
         </div>
       )}
+      {path.get('register') && referer.includes('/register') && (
+        <div className="alert alert-success">
+          You're successfully register, please open the link that we've sent to activate the account
+        </div>
+      )}
       <form className={styles.auth__form} method="post">
         <fieldset>
-          <Input type={'text'} name={'username'} label={'Username'} placeholder={'Username or email address'} id={'input-username'} required={true} maxLength={50} />
-          <Input type={'password'} name={'password'} label={'Password'} placeholder={'Password'} id={'input-password'} required={true} maxLength={50} />
+          <Input
+            type={'text'}
+            name={'username'}
+            label={'Username'}
+            placeholder={'Username or email address'}
+            id={'input-username'}
+            required={true}
+            maxLength={50}
+            defaultValue={path.get('email') || ''}
+          />
+          <Input
+            type={'password'}
+            name={'password'}
+            label={'Password'}
+            placeholder={'Password'}
+            id={'input-password'}
+            required={true}
+            maxLength={50}
+          />
           <InputGroup className={'grid col-3-2 mb-2'}>
             <Checkbox name={'remember'} id={'input-remember'} label={'Remember for 30 days'} />
             <Link href="/forgot-password" className="text-right">Forgot Password?</Link>
