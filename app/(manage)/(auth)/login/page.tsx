@@ -1,12 +1,16 @@
 import Link from "next/link";
 import styles from '../page.module.css';
 import {clsx} from "clsx";
-import {Input, InputGroup} from "@/app/components/Form/Input";
-import {Checkbox} from "@/app/components/Form/Checkbox";
-import {Button, ButtonLink} from "@/app/components/Form/Button";
+import {InputGroup} from "@/app/components/Form/Input";
+import {ButtonLink} from "@/app/components/Form/Button";
 import Image from "next/image";
+import {LoginForm} from "@/app/(manage)/(auth)/login/components/LoginForm";
+import {headers} from "next/headers";
 
 export default async function Login() {
+  const headersList = headers()
+  const referer = headersList.get('referer')
+
   return (
     <main className={clsx('main', styles.auth__main)}>
       <div className={styles.auth__wrapper}>
@@ -18,21 +22,7 @@ export default async function Login() {
             </div>
         </div>
 
-        <div className="alert alert-error" style={{display: 'none'}}>
-          Your password do not match
-        </div>
-
-        <form className={styles.auth__form} method="post">
-          <fieldset>
-            <Input type={'text'} name={'username'} label={'Username'} placeholder={'Username or email address'} id={'input-username'} required={true} maxLength={50} />
-            <Input type={'password'} name={'password'} label={'Password'} placeholder={'Password'} id={'input-password'} required={true} maxLength={50} />
-            <InputGroup className={'grid col-3-2 mb-2'}>
-              <Checkbox name={'remember'} id={'input-remember'} label={'Remember for 30 days'} />
-              <Link href="/forgot-password" className="text-right">Forgot Password?</Link>
-            </InputGroup>
-            <Button type={'submit'} className={'width-full'}>Sign In</Button>
-          </fieldset>
-        </form>
+        <LoginForm referer={referer || ''} />
 
         <p className={clsx('mb-1 mt-1', styles.separator__or)}>OR</p>
 

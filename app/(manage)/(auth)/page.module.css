@@ -32,9 +32,6 @@
     font-weight: var(--font-regular);
     color: var(--text-color-light);
 }
-.auth__form {
-    margin-top: var(--size-1-5);
-}
 .separator__or {
     text-align: center;
     font-size: var(--small-font-size);
@@ -73,6 +70,9 @@
     margin-right: 10px;
 }
 
+.auth__titleWrapper {
+    margin-bottom: 1rem;
+}
 
 @media screen and (min-width: 568px){
     .auth__container {

@@ -20,7 +20,8 @@ export interface ApiResponse<T> {
   status?: string,
   message?: string,
   data?: null | Array<T> | T,
-  errors: ApiError | string
+  errors: ApiError | string,
+  myObject: Record<string, object[] | string>
 }
 export interface FormResult<T = any> {
   type?: string | null,

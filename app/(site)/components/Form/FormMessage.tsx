@@ -3,7 +3,7 @@ import React from "react";
 import {ItemWrapper} from "@/app/(site)/components/Wrapper";
 import {clsx} from "clsx";
 
-export const FormMessage = ({errors, errorKey}: {errors: ApiError | string | undefined, errorKey?: string | null}) => {
+export const FormMessage = ({errors, errorKey}: {errors: ApiError | string | undefined | null, errorKey?: string | null}) => {
   let errorMessage: string[] = [];
   if (typeof errors === "string" && !errorKey) {
     errorMessage.push(errors);
@@ -35,7 +35,7 @@ export const FormMessage = ({errors, errorKey}: {errors: ApiError | string | und
     errorElement = errorMessage.map(item => <p className={clsx('text-small', errorKey && 'text-error mt-0-5')}>{item}</p>)
   }
   return (
-    <ItemWrapper wrapper={children => errorKey ? <></> : <div className="alert alert-error">{children}</div>}>
+    <ItemWrapper wrapper={children => errorKey ? <>{children}</> : <div className="alert alert-error">{children}</div>}>
       {errorElement}
     </ItemWrapper>
     )
