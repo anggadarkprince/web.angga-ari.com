@@ -4,7 +4,7 @@ import styles from "@/app/(manage)/(auth)/page.module.css";
 import {Input} from "@/app/components/Form/Input";
 import {Button} from "@/app/components/Form/Button";
 import React, {useState} from "react";
-import {ContactType, FormResult} from "@/app/types";
+import {ApiError, ContactType, FormResult} from "@/app/types";
 import {useRouter} from "next/navigation";
 import {API_URL} from "@/app/utility/constants";
 import {clsx} from "clsx";
@@ -17,6 +17,7 @@ export const RegisterForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState<FormResult<ContactType> | null>(null);
+  const errors = submitResult?.response?.errors as ApiError;
   const router = useRouter();
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -80,8 +81,7 @@ export const RegisterForm = () => {
             maxLength={50}
             value={name}
             onChange={e => setName(e.target.value)}
-            errors={submitResult?.response?.errors}
-            errorKey={'name'}
+            errors={errors?.name}
           />
           <Input
             name={'username'}
@@ -92,8 +92,7 @@ export const RegisterForm = () => {
             maxLength={50}
             value={username}
             onChange={e => setUsername(e.target.value)}
-            errors={submitResult?.response?.errors}
-            errorKey={'username'}
+            errors={errors?.username}
           />
           <Input
             type={'email'}
@@ -105,8 +104,7 @@ export const RegisterForm = () => {
             maxLength={50}
             value={email}
             onChange={e => setEmail(e.target.value)}
-            errors={submitResult?.response?.errors}
-            errorKey={'email'}
+            errors={errors?.email}
           />
           <Input
             type={'password'}
@@ -118,8 +116,7 @@ export const RegisterForm = () => {
             maxLength={50}
             value={password}
             onChange={e => setPassword(e.target.value)}
-            errors={submitResult?.response?.errors}
-            errorKey={'password'}
+            errors={errors?.password}
           />
           <Input
             type={'password'}
@@ -131,8 +128,7 @@ export const RegisterForm = () => {
             maxLength={50}
             value={confirmPassword}
             onChange={e => setConfirmPassword(e.target.value)}
-            errors={submitResult?.response?.errors}
-            errorKey={'passwordConfirmation'}
+            errors={errors?.passwordConfirmation}
           />
           <Button type={'submit'} className={'width-full'}>Sign Up</Button>
         </fieldset>

@@ -3,12 +3,12 @@ import React from "react";
 import {ItemWrapper} from "@/app/(site)/components/Wrapper";
 import {clsx} from "clsx";
 
-export const FormMessage = ({errors, errorKey}: {errors: ApiError | string | undefined | null, errorKey?: string | null}) => {
+export const FormMessage = ({errors, errorKey}: {errors: ApiError | string | Array<any> | undefined | null, errorKey?: string | null}) => {
   let errorMessage: string[] = [];
   if (typeof errors === "string" && !errorKey) {
     errorMessage.push(errors);
   } else if (Array.isArray(errors)) {
-    const isStringArray = errors.length > 0 && errors.every((value) => typeof value === 'string');
+    const isStringArray = errors.length > 0 && errors.every((value) => true);
     if (isStringArray) {
       errorMessage = errors;
     }

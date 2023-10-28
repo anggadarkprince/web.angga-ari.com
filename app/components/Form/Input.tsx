@@ -17,7 +17,7 @@ interface InputType {
   value?: string | number | readonly string[] | undefined,
   defaultValue?: string | number | readonly string[] | undefined,
   onChange?: React.ChangeEventHandler<HTMLInputElement>,
-  errors?: ApiError | null | string,
+  errors?: ApiError | null | string | string[],
   errorKey?: string,
 }
 export const Input = ({type = 'text', label, placeholder, id, name, required, minLength, maxLength, value, defaultValue, onChange, errors, errorKey}: InputType) => {
