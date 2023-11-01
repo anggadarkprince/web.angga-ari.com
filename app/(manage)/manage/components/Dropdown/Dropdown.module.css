@@ -1,0 +1,6 @@
+.dropdown {
+    position: relative;
+}
+.dropdown.open .dropdown__toggle:after {
+    transform: rotate(180deg);
+}

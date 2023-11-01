@@ -1,0 +1,17 @@
+.dropdown__item {
+    display: block;
+    width: 100%;
+    padding: .27rem 1rem;
+    white-space: nowrap;
+    color: var(--text-color);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: var(--body-font);
+    text-align: left;
+    font-size: var(--font-size-normal);
+}
+.dropdown__item:hover,
+.dropdown__item.active {
+    background: var(--container-color-lighter);
+}

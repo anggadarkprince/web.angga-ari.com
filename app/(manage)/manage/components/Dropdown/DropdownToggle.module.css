@@ -1,0 +1,20 @@
+.dropdown__toggle {
+    background: none;
+    border: none;
+    font-size: var(--normal-font-size);
+    font-family: var(--body-font);
+}
+.dropdown__toggle:not(.no-arrow):after {
+    content: '\eb3a';
+    font-family: unicons-line;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.3rem;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    font-variant: normal;
+    text-transform: none;
+    transition: 0.2s ease;
+    vertical-align: middle;
+}

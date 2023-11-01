@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from '../page.module.css';
 import {clsx} from "clsx";
-import {ResetPasswordForm} from "@/app/(manage)/(auth)/reset-password/components/ResetPasswordForm";
+import {ResetPasswordForm} from "@/app/(auth)/reset-password/components/ResetPasswordForm";
 import {decodeResetToken} from "@/app/actions/password";
 import React from "react";
 

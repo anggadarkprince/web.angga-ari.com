@@ -1,5 +1,6 @@
 "use client";
 
+import styles from './LandingPage.module.css';
 import {Header} from "@/app/(site)/components/Header/Header";
 import {Banner} from "@/app/(site)/components/Banner/Banner";
 import {About} from "@/app/(site)/components/About/About";
@@ -30,7 +31,7 @@ export const LandingPage = ({profile, experiences, expertises, showcases}: Landi
   return (
     <>
       <Header sections={[homeRef, aboutRef, expertiseRef, experienceRef, showcaseRef, contactRef]} profile={profile}/>
-      <main className="main">
+      <main className={styles.main}>
         <Banner ref={homeRef} profile={profile}/>
         <About ref={aboutRef} profile={profile}/>
         <Expertise ref={expertiseRef} expertises={expertises}/>

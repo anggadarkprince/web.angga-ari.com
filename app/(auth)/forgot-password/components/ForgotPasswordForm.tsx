@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "@/app/(manage)/(auth)/page.module.css";
+import styles from "@/app/(auth)/page.module.css";
 import {Input} from "@/app/components/Form/Input";
 import {Button} from "@/app/components/Form/Button";
 import React, {useState} from "react";

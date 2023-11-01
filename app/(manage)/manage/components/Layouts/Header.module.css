@@ -1,0 +1,78 @@
+.header {
+    padding: 0.25rem 1.2rem 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    position: relative;
+    align-items: center;
+}
+.header__nav {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.header__navLink {
+    padding: 10px;
+    align-items: center;
+    display: flex;
+    color: var(--title-color);
+}
+.header__navLink:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+.header__navIcon {
+    font-size: var(--h3-font-size);
+}
+.header__navAvatar {
+    border-radius: 5px;
+    object-fit: cover;
+    width: 25px;
+    height: 25px;
+    object-position: center center;
+    margin-right: 10px;
+}
+
+.button__menuToggle {
+    background: none;
+    border-radius: 5px;
+    border: none;
+    font-size: var(--h2-font-size);
+    cursor: pointer;
+    color: var(--title-color);
+    line-height: 1;
+}
+
+
+
+.notification__dropdown {
+    position: static;
+}
+.notification__dropdownMenu {
+    padding: 0;
+    height: max-content;
+    width: 100%;
+}
+.notification__dropdownList {
+    background: var(--container-color-lighter);
+}
+.notification__dropdownItem {
+    white-space: normal !important;
+    font-size: var(--small-font-size);
+    border-bottom: 1px solid var(--container-color-light);
+    padding: .35rem 1rem !important;
+}
+.notification__dropdownItem:last-child {
+    border-bottom: none;
+}
+
+
+@media screen and (min-width: 568px) {
+    .notification__dropdown {
+        position: relative;
+    }
+    .notification__dropdownMenu {
+        width: 300px;
+    }
+}
