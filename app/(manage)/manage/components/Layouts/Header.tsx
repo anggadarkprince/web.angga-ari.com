@@ -3,11 +3,7 @@
 import styles from './Header.module.css';
 import React from "react";
 import {clsx} from "clsx";
-import {Dropdown} from "@/app/(manage)/manage/components/Dropdown/Dropdown";
-import {DropdownToggle} from "@/app/(manage)/manage/components/Dropdown/DropdownToggle";
-import {DropdownMenu} from "@/app/(manage)/manage/components/Dropdown/DropdownMenu";
-import {DropdownDivider} from "@/app/(manage)/manage/components/Dropdown/DropdownDivider";
-import {DropdownItem} from "@/app/(manage)/manage/components/Dropdown/DropdownItem";
+import {Dropdown, DropdownToggle, DropdownMenu, DropdownDivider, DropdownItem} from "@/app/components/Dropdowns";
 import {clearAccessToken} from "@/app/actions/cookies";
 import {useRouter} from "next/navigation";
 

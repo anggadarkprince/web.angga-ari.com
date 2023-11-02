@@ -1,9 +1,15 @@
+"use client"
+
 import React from "react";
 import styles from './Sidebar.module.css';
 import {clsx} from "clsx";
 import Link from "next/link";
+import {Button} from "@/app/components/Buttons";
+import {useTheme} from "@/app/context/ThemeContext";
 
 export const Sidebar = () => {
+  const {theme, setTheme} = useTheme();
+
   return (
     <nav className={styles.sidebar}>
       <a href="../index.html" className={styles.nav__logo}>
@@ -85,11 +91,14 @@ export const Sidebar = () => {
         </li>
       </ul>
       <div className={clsx(styles.nav__footer, 'mt-auto')}>
-        <button className="button button__white button__small" id="theme-button">
-          <i className="uil-moon"></i><span className="nav__text ml-0-5">Dark Theme</span>
-        </button>
+        <Button variant={"white"} size={"small"} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+          <i className={theme == 'light' ? 'uil-moon' : 'uil-sun'}></i>
+          <span className="nav__text ml-0-5">
+            {theme == 'light' ? 'Dark' : 'Light'} Theme
+          </span>
+        </Button>
         <div className={styles.nav__copyright}>
-          <small className="mt-1 display-block line-height-1">&copy; 2023 all rights reserved</small>
+          <small className="mt-1 display-block line-height-1">&copy; {(new Date()).getFullYear()} all rights reserved</small>
           <small className="text-fade text-smaller">Version 1.0 - builds 20230811</small>
         </div>
       </div>

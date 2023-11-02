@@ -1,8 +1,8 @@
 "use client"
 
 import styles from "@/app/(auth)/page.module.css";
-import {Input} from "@/app/components/Form/Input";
-import {Button} from "@/app/components/Form/Button";
+import {Input} from "@/app/components/Inputs";
+import {Button} from "@/app/components/Buttons";
 import React, {useState} from "react";
 import {ApiError, ContactType, FormResult} from "@/app/types";
 import {useRouter} from "next/navigation";
@@ -130,7 +130,7 @@ export const RegisterForm = () => {
             onChange={e => setConfirmPassword(e.target.value)}
             errors={errors?.passwordConfirmation}
           />
-          <Button type={'submit'} className={'width-full'}>Sign Up</Button>
+          <Button type={'submit'} full={true}>Sign Up</Button>
         </fieldset>
       </form>
     </>

@@ -1,11 +1,11 @@
 import Link from "next/link";
 import styles from '../page.module.css';
 import {clsx} from "clsx";
-import {InputGroup} from "@/app/components/Form/Input";
-import {ButtonLink} from "@/app/components/Form/Button";
+import {InputGroup} from "@/app/components/Inputs";
 import Image from "next/image";
 import {LoginForm} from "@/app/(auth)/login/components/LoginForm";
 import {headers} from "next/headers";
+import {Button} from "@/app/components/Buttons";
 
 export default async function Login() {
   const headersList = headers()
@@ -27,12 +27,12 @@ export default async function Login() {
         <p className={clsx('mb-1 mt-1', styles.separator__or)}>OR</p>
 
         <InputGroup className={'grid gap-1 col-lg-2 mb-1'}>
-          <ButtonLink href={'#'} className={clsx('width-full', styles.button__social)}>
+          <Button href={'#'} full={true} className={styles.button__social}>
             <Image src="/assets/img/google.png" alt="Google" width={20} height={20}/>Google
-          </ButtonLink>
-          <ButtonLink href={'#'} className={clsx('width-full', styles.button__social)}>
+          </Button>
+          <Button href={'#'} full={true} className={styles.button__social}>
             <Image src="/assets/img/github.png" alt="Github" width={20} height={20}/>Github
-          </ButtonLink>
+          </Button>
         </InputGroup>
         <p className="text-center">Don't you have an account? <Link href="/register">Sign Up</Link></p>
         <p className="text-center text-fade mt-2">&copy; 2023 All Rights Reserved.</p>

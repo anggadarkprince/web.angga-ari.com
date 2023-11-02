@@ -1,0 +1,83 @@
+.button {
+    display: inline-flex;
+    white-space: nowrap;
+    justify-content: center;
+    user-select: none;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 0.531rem 0.85rem;
+    height: 40px;
+    border-radius: 0.3rem;
+    font-weight: var(--font-medium);
+    border: none;
+    font-size: var(--normal-font-size);
+    font-family: var(--body-font);
+    transition: 0.2s;
+    cursor: pointer;
+}
+.button:disabled,
+.button.disabled,
+fieldset:disabled .button {
+    background-color: var(--primary-color-lighter);
+    pointer-events: none;
+    cursor: none;
+}
+.button:hover,
+.button.active {
+    color: #fff;
+    background-color: var(--primary-color-alt);
+}
+.button__white {
+    background-color: var(--body-color);
+    border: 1px solid var(--text-color-lighter);
+    color: var(--title-color);
+}
+.button__white:hover,
+.button__white.active {
+    background-color: var(--container-color-lighter);
+    color: var(--title-color);
+}
+.button__white:disabled,
+.button__white.disabled {
+    background-color: var(--container-color-lighter);;
+    color: var(--text-color-light);
+}
+.button__success {
+    background-color: var(--success-color);
+}
+.button__success:hover,
+.button__success.active {
+    background-color: var(--success-color-lighter);
+}
+.button__success:disabled,
+.button__success.disabled {
+    background-color: var(--success-color-lighter);;
+}
+.button__danger {
+    background-color: var(--error-color);
+}
+.button__danger:hover,
+.button__danger.active {
+    background-color: var(--error-color-lighter);
+}
+.button__danger:disabled,
+.button__danger.disabled {
+    background-color: var(--error-color-lighter);;
+}
+.button__small {
+    padding: 0.3rem 0.6rem;
+    font-size: var(--small-font-size);
+    border-radius: 0.3rem;
+    height: max-content;
+}
+.button__smaller {
+    padding: 0.25rem 0.6rem;
+    font-size: var(--smaller-font-size);
+    border-radius: 0.15rem;
+    height: max-content;
+}
+.button__large {
+    padding: 0.45rem 0.85rem;
+    font-size: var(--h3-font-size);
+}

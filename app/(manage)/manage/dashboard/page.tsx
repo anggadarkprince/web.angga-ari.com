@@ -2,6 +2,7 @@
 
 import {clearAccessToken} from "@/app/actions/cookies";
 import {useRouter} from "next/navigation";
+import {Button} from "@/app/components/Buttons";
 
 export default async function Dashboard() {
   const router = useRouter();
@@ -10,10 +11,11 @@ export default async function Dashboard() {
     await clearAccessToken();
     router.push('/login');
   }
+
   return (
     <div>
       Dashboard
-      <button className="button" onClick={logout}>Logout</button>
+      <Button type="button" onClick={logout}>Logout</Button>
     </div>
   )
 }

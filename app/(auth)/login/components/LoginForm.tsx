@@ -1,10 +1,10 @@
 "use client"
 
 import styles from "@/app/(auth)/page.module.css";
-import {Input, InputGroup} from "@/app/components/Form/Input";
-import {Checkbox} from "@/app/components/Form/Checkbox";
+import {Input, InputGroup} from "@/app/components/Inputs";
+import {Checkbox} from "@/app/components/Checkbox";
 import Link from "next/link";
-import {Button} from "@/app/components/Form/Button";
+import {Button} from "@/app/components/Buttons";
 import {useRouter, useSearchParams} from "next/navigation";
 import React, {useState} from "react";
 import {ContactType, FormResult} from "@/app/types";
@@ -106,7 +106,7 @@ export const LoginForm = ({referer = ''}: {referer?: string}) => {
             <Checkbox name={'remember'} id={'input-remember'} label={'Remember for 30 days'} />
             <Link href="/forgot-password" className="text-right">Forgot Password?</Link>
           </InputGroup>
-          <Button type={'submit'} className={'width-full'}>Sign In</Button>
+          <Button type={'submit'} full={true}>Sign In</Button>
         </fieldset>
       </form>
     </>

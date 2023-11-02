@@ -1,8 +1,8 @@
 "use client"
 
 import styles from "@/app/(auth)/page.module.css";
-import {Input} from "@/app/components/Form/Input";
-import {Button} from "@/app/components/Form/Button";
+import {Input} from "@/app/components/Inputs";
+import {Button} from "@/app/components/Buttons";
 import React, {useState} from "react";
 import {clsx} from "clsx";
 import {ContactType, FormResult} from "@/app/types";
@@ -71,7 +71,7 @@ export const ForgotPasswordForm = () => {
             onChange={e => setEmail(e.target.value)}
             errors={submitResult?.response?.errors}
           />
-          <Button type={'submit'} className={'width-full mt-1'}>Reset Password</Button>
+          <Button type={'submit'} full={true} className={'mt-1'}>Reset Password</Button>
         </fieldset>
       </form>
     </>

@@ -1,9 +1,9 @@
 "use client"
 
 import styles from "./DropdownToggle.module.css";
-import React, {CSSProperties, MouseEventHandler, PropsWithChildren} from "react";
+import React, {CSSProperties, PropsWithChildren} from "react";
 import {clsx} from "clsx";
-import {useDropdown} from "@/app/(manage)/manage/components/Dropdown/Dropdown";
+import {useDropdown} from "@/app/components/Dropdowns/Dropdown";
 
 interface DropdownToggleProp {
   className?: string;

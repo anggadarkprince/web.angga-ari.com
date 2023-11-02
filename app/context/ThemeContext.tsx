@@ -5,7 +5,7 @@ import {setThemeCookie, clearThemeCookie} from "@/app/actions/cookies";
 
 export const ThemeContext = createContext({
   theme: '',
-  setTheme: (theme: 'dark' | 'light', rememberSelection: boolean = false) => {},
+  setTheme: (theme: 'dark' | 'light', rememberSelection: boolean = true) => {},
 });
 
 export function ThemeContextProvider({theme, children}: PropsWithChildren<{theme: string | undefined}>) {

@@ -3,7 +3,12 @@ import React from "react";
 import {ItemWrapper} from "@/app/(site)/components/Wrapper";
 import {clsx} from "clsx";
 
-export const FormMessage = ({errors, errorKey}: {errors: ApiError | string | Array<any> | undefined | null, errorKey?: string | null}) => {
+interface FormMessageProps {
+  errors: ApiError | string | Array<any> | undefined | null,
+  errorKey?: string | null,
+  as?: 'text' | 'alert'
+}
+export const FormMessage = ({errors, errorKey, as = 'text'}: FormMessageProps) => {
   let errorMessage: string[] = [];
   if (typeof errors === "string" && !errorKey) {
     errorMessage.push(errors);
@@ -27,16 +32,17 @@ export const FormMessage = ({errors, errorKey}: {errors: ApiError | string | Arr
   let errorElement;
   if (errorMessage.length > 1) {
     errorElement = (
-      <ul className={clsx('text-small', errorKey && 'text-error mt-0-5')}>
-        {errorMessage.map(item => <li className="display-flex"><span className="mr-0-5">•</span> {item}</li>)}
+      <ul className={clsx('text-small', as == 'text' && 'text-error mt-0-5')}>
+        {errorMessage.map((item, idx) => <li className="display-flex" key={`error-${idx}`}><span className="mr-0-5">•</span> {item}</li>)}
       </ul>
     );
   } else {
-    errorElement = errorMessage.map(item => <p className={clsx('text-small', errorKey && 'text-error mt-0-5')}>{item}</p>)
+    errorElement = errorMessage.map(item => <p className={clsx('text-small', as == 'text' && 'text-error mt-0-5')}>{item}</p>)
   }
-  return (
-    <ItemWrapper wrapper={children => errorKey ? <>{children}</> : <div className="alert alert-error">{children}</div>}>
+
+  return errorMessage && errorMessage.length > 0 && (
+    <ItemWrapper wrapper={children => as == 'text' ? <>{children}</> : <div className="alert alert-error">{children}</div>}>
       {errorElement}
     </ItemWrapper>
-    )
+  )
 }

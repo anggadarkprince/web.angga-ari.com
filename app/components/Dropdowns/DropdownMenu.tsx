@@ -3,7 +3,7 @@
 import {clsx} from "clsx";
 import styles from './DropdownMenu.module.css';
 import React, {CSSProperties, PropsWithChildren} from "react";
-import {useDropdown} from "@/app/(manage)/manage/components/Dropdown/Dropdown";
+import {useDropdown} from "@/app/components/Dropdowns/Dropdown";
 
 interface DropdownMenuProp {
   positionRight?: boolean;

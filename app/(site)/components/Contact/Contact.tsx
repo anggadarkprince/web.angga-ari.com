@@ -1,7 +1,7 @@
 import styles from './Contact.module.css';
 import {clsx} from "clsx";
 import React, {ForwardedRef, forwardRef, useEffect, useState} from "react";
-import {ApiError, ContactType, FormResult, ProfileType} from "@/app/types";
+import {ContactType, FormResult, ProfileType} from "@/app/types";
 import {FormMessage} from "@/app/(site)/components/Form/FormMessage";
 
 interface ContactProps {
