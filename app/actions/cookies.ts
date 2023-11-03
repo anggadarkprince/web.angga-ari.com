@@ -11,6 +11,10 @@ export async function clearThemeCookie() {
   cookies().delete('theme');
 }
 
+export async function setSidebarCollapseCookie(isCollapsed: boolean) {
+  cookies().set('sidebarCollapse', isCollapsed ? '1' : '');
+}
+
 export async function clearAccessToken() {
   const token = cookies().get("access_token");
   if (token?.value) {

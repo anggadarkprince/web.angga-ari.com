@@ -1,0 +1,103 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.table td,
+.table th {
+    padding: 6px 7px;
+    text-align: left;
+}
+.table th {
+    font-weight: var(--font-medium);
+}
+.table__border tr td {
+    border-top: 1px solid var(--text-color-lighter);
+    border-bottom: 1px solid var(--text-color-lighter);
+}
+.table__border thead th {
+    border-top: 1px solid var(--text-color-lighter);
+    border-bottom: 1px solid var(--text-color-lighter);
+}
+.table__compact td,
+.table__compact th {
+    padding: 2px 4px;
+}
+.table__small td,
+.table__small th {
+    padding: 4px 5px;
+    font-size: var(--small-font-size);
+}
+
+@media (max-width: 767px) {
+
+    /* Force table to not be like tables anymore */
+    .table__responsive,
+    .table__responsive thead,
+    .table__responsive tbody,
+    .table__responsive th,
+    .table__responsive td,
+    .table__responsive tr {
+        display: block;
+        height: auto;
+    }
+
+    .table__responsive table {
+        border: none;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    .table__responsive thead tr,
+    .table__responsive tfoot tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .table__responsive tr {
+        margin-bottom: 15px;
+        border: 1px solid #dddddd !important;
+        border-radius: 5px;
+    }
+
+    .table__responsive .responsive-label {
+        width: 40%;
+        display: inline-block;
+        font-weight: 600;
+        /*left: 10px;
+        position: absolute;*/
+        padding-right: 10px;
+        flex-shrink: 0;
+    }
+
+    .table__responsive > tbody > tr:not(.row-no-header) > td:not([colspan]) {
+        /*padding-left: 40%;*/
+    }
+
+    .table__responsive td {
+        display: flex;
+        /*align-items: center;*/
+    }
+
+    .table__responsive > tbody > tr > td {
+        /* Behave  like a "row" */
+        border: none !important;
+        position: relative;
+        margin-bottom: -1px;
+        border-bottom: 1px solid #dddddd !important;
+    }
+
+    .table__responsive td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+
+    .table__responsive.no-wrap td {
+        white-space: initial !important;
+    }
+}

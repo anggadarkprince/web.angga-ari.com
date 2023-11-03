@@ -1,0 +1,20 @@
+.card {
+    border-radius: 0.3rem;
+    padding: var(--size-1);
+    border: 1px solid var(--text-color-lighter);
+    display: flex;
+    flex-direction: column;
+}
+.card.colorWhite * {
+    color: white;
+}
+.card__title {
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-medium);
+}
+.card__text {
+    font-size: var(--normal-font-size);
+}
+.card[class^='bg-'], .card[class*=' bg-'] {
+    border-color: transparent;
+}

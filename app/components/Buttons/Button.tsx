@@ -3,7 +3,7 @@ import styles from './Button.module.css';
 import {clsx} from "clsx";
 import Link from "next/link";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'error' | 'success' | 'white',
   size?: 'small' | 'medium' | 'large',
   full?: boolean,

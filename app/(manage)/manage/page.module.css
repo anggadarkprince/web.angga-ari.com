@@ -1,3 +1,26 @@
 .main {
     display: flex;
 }
+
+.contentWrapper {
+    min-width: 100%;
+}
+
+.content {
+    min-height: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+}
+
+.pageContent {
+    padding: 1.2rem;
+    width: 100%;
+    flex: 1 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+    .contentWrapper {
+        min-width: 0;
+        width: 100%;
+    }
+}

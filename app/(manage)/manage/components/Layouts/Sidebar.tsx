@@ -6,12 +6,22 @@ import {clsx} from "clsx";
 import Link from "next/link";
 import {Button} from "@/app/components/Buttons";
 import {useTheme} from "@/app/context/ThemeContext";
+import {usePathname, useRouter} from "next/navigation";
+import {clearAccessToken} from "@/app/actions/cookies";
+import {Collapse, CollapseItem, CollapseToggle} from "@/app/components/Collapse";
 
-export const Sidebar = () => {
+export const Sidebar = ({collapse = false}: {collapse: boolean}) => {
   const {theme, setTheme} = useTheme();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const onSignOut = async () => {
+    await clearAccessToken();
+    router.push('/login');
+  }
 
   return (
-    <nav className={styles.sidebar}>
+    <nav className={clsx(styles.sidebar, collapse && styles.sidebar__collapse)}>
       <a href="../index.html" className={styles.nav__logo}>
         <img src="../assets/img/favicon.png" alt="Logo" className="mr-0-5"/>
         <strong>Dash</strong>Board
@@ -29,65 +39,73 @@ export const Sidebar = () => {
       <ul className={styles.nav__list}>
         <li className={styles.nav__section}>Main Menu</li>
         <li className={styles.nav__item}>
-          <Link href="dashboard.html" className={clsx(styles.nav__link, styles.active)}>
+          <Link href="dashboard.html" className={clsx(styles.nav__link, pathname.startsWith('/manage/dashboard') && styles.active)}>
             <i className={clsx(styles.nav__icon, 'uil-estate')}></i> <span className={styles.nav__text}>Home</span>
           </Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="about.html" className={clsx(styles.nav__link)}>
+          <Link href="about.html" className={clsx(styles.nav__link, pathname.startsWith('/manage/about') && styles.active)}>
             <i className={clsx(styles.nav__icon, 'uil-user')}></i> <span className={styles.nav__text}>About</span>
           </Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="expertises.html" className={clsx(styles.nav__link)}>
+          <Link href="expertises.html" className={clsx(styles.nav__link, pathname.startsWith('/manage/expertises') && styles.active)}>
             <i className={clsx(styles.nav__icon, 'uil-file-alt')}></i> <span className={styles.nav__text}>Expertises</span>
           </Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="experiences.html" className={clsx(styles.nav__link)}>
+          <Link href="experiences.html" className={clsx(styles.nav__link, pathname.startsWith('/manage/experiences') && styles.active)}>
             <i className={clsx(styles.nav__icon, 'uil-bag')}></i> <span className={styles.nav__text}>Experiences</span>
           </Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="showcases.html" className={clsx(styles.nav__link)}>
+          <Link href="showcases.html" className={clsx(styles.nav__link, pathname.startsWith('/manage/showcases') && styles.active)}>
             <i className={clsx(styles.nav__icon, 'uil-image-plus')}></i> <span className={styles.nav__text}>Showcases</span>
           </Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="messages.html" className={clsx(styles.nav__link)}>
+          <Link href="messages.html" className={clsx(styles.nav__link, pathname.startsWith('/manage/messages') && styles.active)}>
             <i className={clsx(styles.nav__icon, 'uil-at')}></i> <span className={styles.nav__text}>Messages</span>
           </Link>
         </li>
         <li className={styles.nav__section}>Preferences</li>
         <li className={styles.nav__item}>
-          <a href="#sub-setting" className={clsx(styles.nav__link, 'action-toggle collapsed')}>
-            <i className={clsx(styles.nav__icon, 'uil-setting')}></i>
-            <span className={styles.nav__text}>Settings</span>
-            <i className="nav__arrow"></i>
-          </a>
-          <ul className={clsx(styles.nav__list, 'collapse')} id="sub-setting">
-            <li className={styles.nav__item}>
-              <Link href="/manage/setting-general.html" className={styles.nav__link}>
-                <i className={clsx(styles.nav__icon, 'uil-web-grid')}></i> <span className={styles.nav__text}>General</span>
-              </Link>
-            </li>
-            <li className={styles.nav__item}>
-              <Link href="/manage/setting-account.html" className={styles.nav__link}>
-                <i className={clsx(styles.nav__icon, 'uil-user-square')}></i> <span className={styles.nav__text}>Account</span>
-              </Link>
-            </li>
-            <li className={styles.nav__item}>
-              <Link href="/manage/setting-password.html" className={styles.nav__link}>
-                <i className={clsx(styles.nav__icon, 'uil-lock')}></i> <span className={styles.nav__text}>Password</span>
-              </Link>
-            </li>
-          </ul>
+          <Collapse collapsed={!pathname.startsWith('/manage/setting')}>
+            <CollapseToggle>
+              {isCollapse => (
+                <a href="#" className={clsx(styles.nav__link, pathname.startsWith('/manage/setting') && styles.active, isCollapse && styles.collapsed)}>
+                  <i className={clsx(styles.nav__icon, 'uil-setting')}></i>
+                  <span className={styles.nav__text}>Settings</span>
+                  <i className={styles.nav__arrow}></i>
+                </a>
+              )}
+            </CollapseToggle>
+            <CollapseItem>
+              <ul className={clsx(styles.nav__list)}>
+                <li className={styles.nav__item}>
+                  <Link href="/manage/setting/general" className={clsx(styles.nav__link, pathname.startsWith('/manage/setting/general') && styles.active)}>
+                    <i className={clsx(styles.nav__icon, 'uil-web-grid')}></i> <span className={styles.nav__text}>General</span>
+                  </Link>
+                </li>
+                <li className={styles.nav__item}>
+                  <Link href="/manage/setting/account" className={clsx(styles.nav__link, pathname.startsWith('/manage/setting/account') && styles.active)}>
+                    <i className={clsx(styles.nav__icon, 'uil-user-square')}></i> <span className={styles.nav__text}>Account</span>
+                  </Link>
+                </li>
+                <li className={styles.nav__item}>
+                  <Link href="/manage/setting/password" className={clsx(styles.nav__link, pathname.startsWith('/manage/setting/password') && styles.active)}>
+                    <i className={clsx(styles.nav__icon, 'uil-lock')}></i> <span className={styles.nav__text}>Password</span>
+                  </Link>
+                </li>
+              </ul>
+            </CollapseItem>
+          </Collapse>
         </li>
         <li className={styles.nav__item}>
-          <a href="login.html" className={styles.nav__link}>
+          <button type={'button'} onClick={onSignOut} className={styles.nav__link}>
             <i className={clsx(styles.nav__icon, 'uil-signout color-aggressive')}></i>
             <span className={clsx(styles.nav__text, 'color-aggressive')}>Sign Out</span>
-          </a>
+          </button>
         </li>
       </ul>
       <div className={clsx(styles.nav__footer, 'mt-auto')}>

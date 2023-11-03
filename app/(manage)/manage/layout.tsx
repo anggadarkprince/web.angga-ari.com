@@ -9,6 +9,8 @@ import {cookies} from "next/headers";
 import {clsx} from "clsx";
 import {Sidebar} from "@/app/(manage)/manage/components/Layouts/Sidebar";
 import {Header} from "@/app/(manage)/manage/components/Layouts/Header";
+import {Footer} from "@/app/(manage)/manage/components/Layouts/Footer";
+import {ContentWrapper} from "@/app/(manage)/manage/components/Layouts/ContentWrapper";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -25,18 +27,16 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   const cookieStore = cookies();
   const theme = cookieStore.get('theme');
+  const sidebarCollapse = cookieStore.get('sidebarCollapse');
+
   return (
     <html lang="en">
     <ThemeContextProvider theme={theme?.value}>
       <body className={clsx(poppins.className, theme?.value === 'dark' && 'dark-theme')}>
         <main className={styles.main}>
-          <Sidebar/>
-          <section className="content-wrapper">
-            <Header/>
-            <div className="content">
-              {children}
-            </div>
-          </section>
+          <ContentWrapper sidebarCollapse={!!sidebarCollapse?.value}>
+            {children}
+          </ContentWrapper>
         </main>
       </body>
     </ThemeContextProvider>

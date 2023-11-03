@@ -5,18 +5,32 @@
 }
 .form__input {
     background-color: var(--input-color);
-    border-radius: 0.4rem;
-    padding: 0.75rem 1rem;
+    border-radius: 0.3rem;
+    padding: 0.5rem 1rem;
     width: 100%;
     color: var(--text-color);
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
-    border: 2px solid transparent;
+    border: 1px solid var(--text-color-lighter);
     outline: none;
     transition: 0.2s;
+    height: 40px;
+}
+.input__small {
+    padding: 0.4rem 0.85rem;
+    height: 35px;
+    font-size: var(--small-font-size);
+}
+.input__large {
+    padding: 0.75rem 1rem;
+    height: 45px;
+}
+.form_inputBorderless {
+    border: 2px solid transparent;
 }
 .form__input:focus {
     border-color: var(--primary-color);
+    box-shadow: 0 0 0 .2rem var(--color-shadow);
 }
 .form__input::placeholder {
     color: var(--text-color-light);
@@ -25,4 +39,12 @@
 .form__input.disabled,
 fieldset:disabled .form__input {
     background-color: var(--container-color-light);
+}
+.form__inputIcon {
+    position: absolute;
+    padding: 0 12px;
+    line-height: 40px;
+}
+.form__inputIcon ~ .form__input {
+    padding-left: 2.2rem;
 }

@@ -1,5 +1,3 @@
-"use client"
-
 import styles from './Header.module.css';
 import React from "react";
 import {clsx} from "clsx";
@@ -7,7 +5,7 @@ import {Dropdown, DropdownToggle, DropdownMenu, DropdownDivider, DropdownItem} f
 import {clearAccessToken} from "@/app/actions/cookies";
 import {useRouter} from "next/navigation";
 
-export const Header = () => {
+export const Header = ({onSidebarCollapse}: {onSidebarCollapse: () => void}) => {
   const router = useRouter();
 
   const onSignOut = async () => {
@@ -17,7 +15,7 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <button type="button" className={styles.button__menuToggle}>
+      <button type="button" className={styles.button__menuToggle} onClick={onSidebarCollapse}>
         <i className="uil-bars"></i>
       </button>
       <ul className={styles.header__nav}>

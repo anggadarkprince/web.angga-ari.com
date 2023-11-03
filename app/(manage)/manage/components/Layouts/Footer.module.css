@@ -1,0 +1,5 @@
+.footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--container-color-lighter);
+    font-size: var(--small-font-size);
+}

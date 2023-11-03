@@ -532,6 +532,15 @@ body {
     overflow-x: hidden;
 }
 
+.section__title {
+    font-size: var(--h2-font-size);
+    line-height: 1.2;
+}
+
+.section__subtitle {
+    font-size: var(--normal-font-size);
+    color: var(--text-color-light);
+}
 
 /*==================== MEDIA QUERIES ====================*/
 
@@ -579,11 +588,6 @@ body {
 
 /* For large-medium devices */
 @media screen and (min-width: 768px) {
-    .content-wrapper {
-        min-width: 0;
-        width: 100%;
-    }
-
     .col-lg-1 {
         grid-template-columns: repeat(1, 1fr);
     }
