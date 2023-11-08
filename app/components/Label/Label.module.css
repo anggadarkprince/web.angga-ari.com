@@ -1,0 +1,31 @@
+.label {
+    font-size: var(--smaller-font-size);
+    padding: 3px 7px;
+    background: var(--container-color-lighter);
+    border-radius: 4px;
+}
+.label__white {
+    background: white;
+    border: 1px solid var(--text-color-lighter);
+    color: #333333;
+}
+.label__error {
+    color: white;
+    background: var(--error-color);
+}
+.label__success {
+    color: white;
+    background: var(--success-color);
+}
+.label__warning {
+    color: white;
+    background: var(--warning-color);
+}
+.label__info {
+    color: white;
+    background: var(--info-color);
+}
+.label__primary {
+    color: white;
+    background: var(--primary-color);
+}

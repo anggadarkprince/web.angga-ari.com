@@ -1,6 +1,7 @@
 "use client"
 
 import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@/app/components/Table";
+import {Label, LabelVariant} from "@/app/components/Label";
 
 const rows = [
   {
@@ -69,11 +70,30 @@ export const ContactMessageTable = () => {
     <Table className="mb-2" columns={columns} items={rows}>
       <TableHeader render={(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}/>
       <TableBody render={(item, index) => (
-        <TableRow key={`${item.id}-${index}`} render={(columnKey) => (
-          <TableCell key={`${item.id}-${columnKey}`}>
-            {columnKey === 'no' ? (index + 1) : item[columnKey]}
-          </TableCell>
-        )} />
+        <TableRow key={`${item.id}-${index}`} render={(columnKey) => {
+          let variant: LabelVariant = 'white';
+          let cellValue = item[columnKey];
+          if (columnKey === 'status') {
+            if (item[columnKey] === 'PENDING') {
+              variant = 'white';
+            } else if (item[columnKey] === 'REPLIED') {
+              variant = 'success';
+            } else if (item[columnKey] === 'REJECTED') {
+              variant = 'error';
+            } else if (item[columnKey] === 'HOLD') {
+              variant = 'warning';
+            }
+            cellValue = <Label variant={variant}>{item[columnKey]}</Label>;
+          }
+          if (columnKey == 'no') {
+            cellValue = (index + 1);
+          }
+          return (
+            <TableCell key={`${item.id}-${columnKey}`}>
+              {cellValue}
+            </TableCell>
+          )
+        }} />
       )}/>
     </Table>
   )
