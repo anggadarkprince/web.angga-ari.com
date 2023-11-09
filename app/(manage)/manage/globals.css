@@ -441,6 +441,9 @@ fieldset legend {
 .text-washout {
     color: var(--text-color-lighter) !important;
 }
+.text-error {
+    color: var(--error-color);
+}
 
 .gap-1 {
     gap: var(--size-1);

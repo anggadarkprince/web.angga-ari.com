@@ -3,15 +3,13 @@ import {Button, ButtonGroup} from "@/app/components/Buttons";
 import {Card, CardTitle} from "@/app/components/Card";
 import Link from "next/link";
 import {ContactMessageTable} from "@/app/(manage)/manage/dashboard/components/ContactMessageTable";
+import {PageTitle} from "@/app/(manage)/manage/components/Layouts/PageTitle";
 
 export default async function Dashboard() {
 
   return (
     <>
-      <div className="mb-2">
-        <h1 className="section__title">Dashboard</h1>
-        <p className="section__subtitle">Insight about the website</p>
-      </div>
+      <PageTitle title="Dashboard" subtitle="Insight about the website" className="mb-2" />
       <div>
         <ButtonGroup className="mb-1">
           <Button href="#" variant="white" size="small" active={true}>12 Months</Button>

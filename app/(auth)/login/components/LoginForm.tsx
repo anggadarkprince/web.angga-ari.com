@@ -7,7 +7,7 @@ import Link from "next/link";
 import {Button} from "@/app/components/Buttons";
 import {useRouter, useSearchParams} from "next/navigation";
 import React, {useState} from "react";
-import {ContactType, FormResult} from "@/app/types";
+import {UserType, FormResult} from "@/app/types";
 import {clsx} from "clsx";
 import {API_URL} from "@/app/utility/constants";
 
@@ -16,7 +16,7 @@ export const LoginForm = ({referer = ''}: {referer?: string}) => {
   const [username, setUsername] = useState(path.get('email') || '');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitResult, setSubmitResult] = useState<FormResult<ContactType> | null>(null);
+  const [submitResult, setSubmitResult] = useState<FormResult<UserType> | null>(null);
   const router = useRouter();
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -69,7 +69,7 @@ export const LoginForm = ({referer = ''}: {referer?: string}) => {
           You're successfully register, please open the link that we've sent to activate the account
         </div>
       )}
-      {!isSubmitting && submitResult?.message  && (
+      {!isSubmitting && submitResult?.message && (
         <div className={clsx('alert', `alert-${submitResult.type}`)}>
           {submitResult.message}
         </div>

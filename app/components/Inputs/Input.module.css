@@ -16,6 +16,9 @@
     transition: 0.2s;
     height: 40px;
 }
+textarea.form__input {
+    height: auto;
+}
 .input__small {
     padding: 0.4rem 0.85rem;
     height: 35px;

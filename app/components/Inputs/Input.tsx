@@ -1,13 +1,14 @@
 import styles from './Input.module.css';
-import React, {HTMLAttributes, InputHTMLAttributes} from "react";
-import {FormMessage} from "@/app/(site)/components/Form/FormMessage";
+import React, {InputHTMLAttributes, TextareaHTMLAttributes} from "react";
+import {FormMessage} from "@/app/components/Form/FormMessage";
 import {ApiError} from "@/app/types";
 import {InputGroup} from "@/app/components/Inputs/InputGroup";
 import {clsx} from "clsx";
 
 type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 
-interface InputType extends InputHTMLAttributes<FormControlElement>{
+export interface InputProps extends InputHTMLAttributes<FormControlElement>, TextareaHTMLAttributes<FormControlElement> {
+  as?: 'input' | 'textarea',
   label?: string,
   inputSize?: 'small' | 'medium' | 'large',
   icon?: string,
@@ -15,12 +16,12 @@ interface InputType extends InputHTMLAttributes<FormControlElement>{
   errors?: ApiError | null | string | string[],
   errorKey?: string,
 }
-export const Input = ({label, inputSize, icon, borderless = false, errors, errorKey, ...rest}: InputType) => {
+export const Input = ({as: Component = 'input', label, inputSize, icon, borderless = false, errors, errorKey, ...rest}: InputProps) => {
   return (
     <InputGroup>
       {label && <label htmlFor={rest.id} className={styles.form__label}>{label}</label>}
       {icon && <label className={clsx(icon, styles.form__inputIcon)} htmlFor={rest.id}></label>}
-      <input
+      <Component
         className={clsx(styles.form__input, inputSize && `input__${inputSize}`, borderless && styles.form_inputBorderless)}
         {...rest}
       />

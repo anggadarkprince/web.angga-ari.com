@@ -1,0 +1,27 @@
+.alert {
+    font-size: var(--small-font-size);
+    padding: 10px 15px;
+    border-radius: 3px;
+    background: var(--primary-color);
+    color: var(--container-color);
+    margin-bottom: var(--size-0-5);
+}
+.alert__error {
+    background: var(--error-color);
+}
+.alert__white {
+    background: white;
+    color: var(--text-color);
+}
+.alert__success {
+    background: var(--success-color);
+}
+.alert__warning {
+    background: var(--warning-color);
+}
+.alert__info {
+    background: var(--info-color);
+}
+.alert__primary {
+    background: var(--primary-color);
+}

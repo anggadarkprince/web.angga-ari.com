@@ -11,6 +11,7 @@ export interface ShowcaseType extends Prisma.ShowcaseGetPayload<{
 }>{}
 export interface ShowcasePhotoType extends Prisma.ShowcasePhotoGetPayload<{}>{}
 export interface ContactType extends Prisma.ContactGetPayload<{}>{}
+export interface UserType extends Prisma.UserGetPayload<{}>{}
 
 export interface ApiError {
   [name: string | number]: string | string[]
