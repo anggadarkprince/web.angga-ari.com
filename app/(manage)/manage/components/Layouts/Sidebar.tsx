@@ -23,14 +23,14 @@ export const Sidebar = ({collapse = false}: {collapse: boolean}) => {
   return (
     <nav className={clsx(styles.sidebar, collapse && styles.sidebar__collapse)}>
       <a href="../index.html" className={styles.nav__logo}>
-        <img src="../assets/img/favicon.png" alt="Logo" className="mr-0-5"/>
+        <img src="/assets/img/favicon.png" alt="Logo" className="mr-0-5"/>
         <strong>Dash</strong>Board
       </a>
-      <a href="../index.html" className={styles.nav__logoMini}>
-        <img src="../assets/img/favicon.png" alt="Logo"/>
+      <a href="/manage" className={styles.nav__logoMini}>
+        <img src="/assets/img/favicon.png" alt="Logo"/>
       </a>
       <div className={styles.nav__user}>
-        <img src="../assets/img/profile.jpg" alt="Profile" className={styles.nav__avatar}/>
+        <img src="/assets/img/profile.jpg" alt="Profile" className={styles.nav__avatar}/>
         <div className={clsx(styles.nav__userInfo, 'truncate')}>
           <h4 className={styles.nav__profileName}>Angga Ari Wijaya</h4>
           <p className={clsx(styles.nav__profileEmail, 'truncate')}>angga.aw92@gmail.com</p>
@@ -39,32 +39,32 @@ export const Sidebar = ({collapse = false}: {collapse: boolean}) => {
       <ul className={styles.nav__list}>
         <li className={styles.nav__section}>Main Menu</li>
         <li className={styles.nav__item}>
-          <Link href="dashboard" className={clsx(styles.nav__link, pathname.startsWith('/manage/dashboard') && styles.active)}>
+          <Link href="/manage/dashboard" className={clsx(styles.nav__link, pathname.startsWith('/manage/dashboard') && styles.active)}>
             <i className={clsx(styles.nav__icon, 'uil-estate')}></i> <span className={styles.nav__text}>Home</span>
           </Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="about" className={clsx(styles.nav__link, pathname.startsWith('/manage/about') && styles.active)}>
+          <Link href="/manage/about" className={clsx(styles.nav__link, pathname.startsWith('/manage/about') && styles.active)}>
             <i className={clsx(styles.nav__icon, 'uil-user')}></i> <span className={styles.nav__text}>About</span>
           </Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="expertises" className={clsx(styles.nav__link, pathname.startsWith('/manage/expertises') && styles.active)}>
+          <Link href="/manage/expertises" className={clsx(styles.nav__link, pathname.startsWith('/manage/expertises') && styles.active)}>
             <i className={clsx(styles.nav__icon, 'uil-file-alt')}></i> <span className={styles.nav__text}>Expertises</span>
           </Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="experiences" className={clsx(styles.nav__link, pathname.startsWith('/manage/experiences') && styles.active)}>
+          <Link href="/manage/experiences" className={clsx(styles.nav__link, pathname.startsWith('/manage/experiences') && styles.active)}>
             <i className={clsx(styles.nav__icon, 'uil-bag')}></i> <span className={styles.nav__text}>Experiences</span>
           </Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="showcases" className={clsx(styles.nav__link, pathname.startsWith('/manage/showcases') && styles.active)}>
+          <Link href="/manage/showcases" className={clsx(styles.nav__link, pathname.startsWith('/manage/showcases') && styles.active)}>
             <i className={clsx(styles.nav__icon, 'uil-image-plus')}></i> <span className={styles.nav__text}>Showcases</span>
           </Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="messages" className={clsx(styles.nav__link, pathname.startsWith('/manage/messages') && styles.active)}>
+          <Link href="/manage/messages" className={clsx(styles.nav__link, pathname.startsWith('/manage/messages') && styles.active)}>
             <i className={clsx(styles.nav__icon, 'uil-at')}></i> <span className={styles.nav__text}>Messages</span>
           </Link>
         </li>
@@ -83,17 +83,17 @@ export const Sidebar = ({collapse = false}: {collapse: boolean}) => {
             <CollapseItem>
               <ul className={clsx(styles.nav__list)}>
                 <li className={styles.nav__item}>
-                  <Link href="setting/general" className={clsx(styles.nav__link, pathname.startsWith('/manage/setting/general') && styles.active)}>
+                  <Link href="/manage/setting/general" className={clsx(styles.nav__link, pathname.startsWith('/manage/setting/general') && styles.active)}>
                     <i className={clsx(styles.nav__icon, 'uil-web-grid')}></i> <span className={styles.nav__text}>General</span>
                   </Link>
                 </li>
                 <li className={styles.nav__item}>
-                  <Link href="setting/account" className={clsx(styles.nav__link, pathname.startsWith('/manage/setting/account') && styles.active)}>
+                  <Link href="/manage/setting/account" className={clsx(styles.nav__link, pathname.startsWith('/manage/setting/account') && styles.active)}>
                     <i className={clsx(styles.nav__icon, 'uil-user-square')}></i> <span className={styles.nav__text}>Account</span>
                   </Link>
                 </li>
                 <li className={styles.nav__item}>
-                  <Link href="setting/password" className={clsx(styles.nav__link, pathname.startsWith('/manage/setting/password') && styles.active)}>
+                  <Link href="/manage/setting/password" className={clsx(styles.nav__link, pathname.startsWith('/manage/setting/password') && styles.active)}>
                     <i className={clsx(styles.nav__icon, 'uil-lock')}></i> <span className={styles.nav__text}>Password</span>
                   </Link>
                 </li>

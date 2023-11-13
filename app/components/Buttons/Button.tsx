@@ -4,7 +4,7 @@ import {clsx} from "clsx";
 import Link from "next/link";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'error' | 'success' | 'white',
+  variant?: 'primary' | 'error' | 'danger' | 'success' | 'white',
   size?: 'small' | 'medium' | 'large',
   full?: boolean,
   href?: string,
