@@ -9,7 +9,7 @@ export default async function ForgotPassword() {
       <div className={styles.auth__wrapper}>
         <div className="mb-1">
           <h1 className={styles.auth__title}>Forgot password</h1>
-          <h3 className={styles.auth__subtitle}>Don't worry, we'll send you reset instructions</h3>
+          <h3 className={styles.auth__subtitle}>Don&apos;t worry, we&apos;ll send you reset instructions</h3>
         </div>
 
         <ForgotPasswordForm />

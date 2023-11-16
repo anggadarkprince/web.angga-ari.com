@@ -4,6 +4,7 @@ import {clsx} from "clsx";
 import {Dropdown, DropdownToggle, DropdownMenu, DropdownDivider, DropdownItem} from "@/app/components/Dropdowns";
 import {clearAccessToken} from "@/app/actions/cookies";
 import {useRouter} from "next/navigation";
+import Image from "next/image";
 
 export const Header = ({onSidebarCollapse}: {onSidebarCollapse: () => void}) => {
   const router = useRouter();
@@ -55,12 +56,12 @@ export const Header = ({onSidebarCollapse}: {onSidebarCollapse: () => void}) => 
         <li>
           <Dropdown>
             <DropdownToggle className={clsx(styles.header__navLink, 'pr-0')}>
-              <img src="../assets/img/profile.jpg" alt="Profile" className={styles.header__navAvatar}/>
+              <Image src="/assets/img/profile.jpg" width={25} height={25} alt="Profile" className={styles.header__navAvatar}/>
               My Account
             </DropdownToggle>
             <DropdownMenu positionRight={true}>
-              <DropdownItem title="My Account" icon="uil-user"/>
-              <DropdownItem title="Change Password" icon="uil-lock"/>
+              <DropdownItem href="/manage/setting/account" title="My Account" icon="uil-user"/>
+              <DropdownItem href="/manage/setting/password" title="Change Password" icon="uil-lock"/>
               <DropdownDivider/>
               <DropdownItem title="Sign Out" icon="uil-signout" onClick={onSignOut}/>
             </DropdownMenu>

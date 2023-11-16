@@ -30,3 +30,12 @@ export interface FormResult<T = any> {
   message?: string | null,
   response?: ApiResponse<T>,
 }
+
+export interface SettingKeyValueType extends Prisma.SettingGetPayload<{}>{}
+export interface SettingType {
+  title: string;
+  url: string;
+  author: string;
+  keywords: string;
+  description: string;
+}

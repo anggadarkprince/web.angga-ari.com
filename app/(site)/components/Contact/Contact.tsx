@@ -14,7 +14,7 @@ export const Contact = forwardRef(({profile}: ContactProps, ref: ForwardedRef<HT
     const [message, setMessage] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitResult, setSubmitResult] = useState<FormResult<ContactType> | null>(null);
-    let controller: AbortController;
+    let controller: AbortController | undefined;
 
     useEffect(() => {
         return () => {
@@ -22,7 +22,7 @@ export const Contact = forwardRef(({profile}: ContactProps, ref: ForwardedRef<HT
                 controller.abort();
             }
         }
-    }, []);
+    }, [controller]);
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

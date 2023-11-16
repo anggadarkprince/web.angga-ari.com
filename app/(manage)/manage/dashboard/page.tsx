@@ -4,6 +4,7 @@ import {Card, CardTitle} from "@/app/components/Card";
 import Link from "next/link";
 import {ContactMessageTable} from "@/app/(manage)/manage/dashboard/components/ContactMessageTable";
 import {PageTitle} from "@/app/(manage)/manage/components/Layouts/PageTitle";
+import {Suspense} from "react";
 
 export default async function Dashboard() {
 
@@ -52,7 +53,9 @@ export default async function Dashboard() {
           <Input type="search" name="search" id="input-search" placeholder="Search message..." icon="uil-search" />
         </div>
 
-        <ContactMessageTable />
+        <Suspense fallback={<p>Loading Contact...</p>}>
+          <ContactMessageTable />
+        </Suspense>
       </div>
     </>
   )

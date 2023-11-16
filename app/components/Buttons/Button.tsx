@@ -36,17 +36,15 @@ export const Button = (props: ButtonProps) => {
     ),
     ...rest,
   }
-  let Wrapper: React.FC<PropsWithChildren> = ({children}) => <button {...wrapperProps}>{children}</button>
+
   if (href) {
-    Wrapper = ({children}) => (
+    return (
       <Link href={href} target={target} className={wrapperProps.className} style={rest.style}>
         {children}
       </Link>
     )
+  } else {
+    return <button {...wrapperProps}>{children}</button>;
   }
-  return (
-    <Wrapper>
-      {children}
-    </Wrapper>
-  )
 }
+Button.displayName = 'Button';

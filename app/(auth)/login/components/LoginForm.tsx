@@ -66,7 +66,7 @@ export const LoginForm = ({referer = ''}: {referer?: string}) => {
       )}
       {path.get('register') && referer.includes('/register') && (
         <div className="alert alert-success">
-          You're successfully register, please open the link that we've sent to activate the account
+          You&apos;re successfully register, please open the link that we&apos;ve sent to activate the account
         </div>
       )}
       {!isSubmitting && submitResult?.message && (

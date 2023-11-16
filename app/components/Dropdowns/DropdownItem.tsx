@@ -2,6 +2,7 @@ import styles from './DropdownItem.module.css';
 import {clsx} from "clsx";
 import React, {CSSProperties, MouseEventHandler, PropsWithChildren} from "react";
 import Link from "next/link";
+import {useDropdown} from "@/app/components/Dropdowns/Dropdown";
 
 interface DropdownItemProp {
   title?: string;
@@ -12,40 +13,38 @@ interface DropdownItemProp {
   onClick?: MouseEventHandler;
 }
 export const DropdownItem = ({title, icon, href, onClick, className, style, children}: PropsWithChildren<DropdownItemProp>) => {
+  const { onToggle } = useDropdown();
+
   const onClickItem: MouseEventHandler<HTMLElement> = (e) => {
+    onToggle();
     if (onClick) {
       e.preventDefault();
       onClick(e);
     }
   }
 
+  const content = children ? children : (
+    <>
+      {icon && <i className={clsx(icon, title && 'mr-0-25')}></i>}
+      {title}
+    </>
+  );
+
   const props = {
     className: clsx(styles.dropdown__item, className),
     style
   };
-  let Wrapper: React.FC<PropsWithChildren> = ({children}) => (
-    <div {...props}>{children}</div>
-  );
+  let dropdownItem = <div {...props}>{content}</div>;
 
   if (onClick) {
-    Wrapper = ({children}) => (
-      <button type={'button'} onClick={onClickItem} {...props}>{children}</button>
-    )
+    dropdownItem = <button type={'button'} onClick={onClickItem} {...props}>{content}</button>
   }
   if (href) {
-    Wrapper = ({children}) => (
-      <Link href={href} {...props}>{children}</Link>
-    )
+    dropdownItem = <Link href={href} onClick={onClickItem} {...props}>{content}</Link>
   }
 
   return (
-    <Wrapper>
-      {children ? children : (
-        <>
-          {icon && <i className={clsx(icon, title && 'mr-0-25')}></i>}
-          {title}
-        </>
-      )}
-    </Wrapper>
+    dropdownItem
   )
 }
+DropdownItem.displayName = 'DropdownItem';

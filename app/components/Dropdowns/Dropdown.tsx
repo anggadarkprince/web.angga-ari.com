@@ -38,6 +38,7 @@ export const Dropdown: React.FC<PropsWithChildren<DropdownProp>> = ({className, 
     </DropdownContext.Provider>
   );
 }
+Dropdown.displayName = 'Dropdown';
 
 interface DropdownContextValue {
   isOpen: boolean;

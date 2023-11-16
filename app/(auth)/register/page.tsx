@@ -11,7 +11,7 @@ export default async function Login() {
     <main className={clsx('main', styles.auth__main)}>
       <div className={styles.auth__wrapper}>
         <div className={styles.auth__titleWrapper}>
-          <img src="../assets/img/favicon.png" alt="Logo" className={styles.auth__logo}/>
+          <Image src="/assets/img/favicon.png" width={50} height={50} alt="Logo" className={styles.auth__logo}/>
           <div>
             <h1 className={styles.auth__title}>Sign Up</h1>
             <h3 className={styles.auth__subtitle}>Register your account right now</h3>

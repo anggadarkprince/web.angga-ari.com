@@ -9,6 +9,7 @@ import {useTheme} from "@/app/context/ThemeContext";
 import {usePathname, useRouter} from "next/navigation";
 import {clearAccessToken} from "@/app/actions/cookies";
 import {Collapse, CollapseItem, CollapseToggle} from "@/app/components/Collapse";
+import Image from "next/image";
 
 export const Sidebar = ({collapse = false}: {collapse: boolean}) => {
   const {theme, setTheme} = useTheme();
@@ -23,14 +24,14 @@ export const Sidebar = ({collapse = false}: {collapse: boolean}) => {
   return (
     <nav className={clsx(styles.sidebar, collapse && styles.sidebar__collapse)}>
       <a href="../index.html" className={styles.nav__logo}>
-        <img src="/assets/img/favicon.png" alt="Logo" className="mr-0-5"/>
+        <Image src="/assets/img/favicon.png" width={30} height={30} alt="Logo" className="mr-0-5"/>
         <strong>Dash</strong>Board
       </a>
       <a href="/manage" className={styles.nav__logoMini}>
-        <img src="/assets/img/favicon.png" alt="Logo"/>
+        <Image src="/assets/img/favicon.png" width={35} height={35} alt="Logo"/>
       </a>
       <div className={styles.nav__user}>
-        <img src="/assets/img/profile.jpg" alt="Profile" className={styles.nav__avatar}/>
+        <Image src="/assets/img/profile.jpg" width={36} height={36} alt="Profile" className={styles.nav__avatar}/>
         <div className={clsx(styles.nav__userInfo, 'truncate')}>
           <h4 className={styles.nav__profileName}>Angga Ari Wijaya</h4>
           <p className={clsx(styles.nav__profileEmail, 'truncate')}>angga.aw92@gmail.com</p>

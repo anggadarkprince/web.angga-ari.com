@@ -37,7 +37,7 @@ export const FormMessage = ({errors, errorKey, as = 'text'}: FormMessageProps) =
       </ul>
     );
   } else {
-    errorElement = errorMessage.map(item => <p className={clsx('text-small', as == 'text' && 'text-error mt-0-5')}>{item}</p>)
+    errorElement = errorMessage.map(item => <p key={`error-${item}`} className={clsx('text-small', as == 'text' && 'text-error mt-0-5')}>{item}</p>)
   }
 
   return errorMessage && errorMessage.length > 0 && (

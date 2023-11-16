@@ -160,11 +160,12 @@ export const AboutForm = ({profile}: AboutFormProps) => {
 
       <form method="post" onSubmit={onSubmit}>
         <fieldset disabled={isSubmitting}>
-          <legend><i className="uil-user mr-0-5"></i>Basic Profile</legend>
+          <legend><i className="uil-user-square mr-0-5"></i>Basic Profile</legend>
           <div className="display-grid col-lg-2 column-gap-2">
             <Input
               label="Full Name"
               placeholder="Full name"
+              icon="uil-user"
               id="full_name"
               value={formState?.full_name}
               onChange={onInputChange}
@@ -173,6 +174,7 @@ export const AboutForm = ({profile}: AboutFormProps) => {
             <Input
               label="Location"
               placeholder="City and country"
+              icon="uil-map-marker"
               id="location"
               value={formState?.location}
               onChange={onInputChange}
@@ -182,6 +184,7 @@ export const AboutForm = ({profile}: AboutFormProps) => {
           <Input
             label="Tagline"
             placeholder="Short tagline"
+            icon="uil-bolt-alt"
             id="tagline"
             value={formState?.tagline}
             onChange={onInputChange}
@@ -190,6 +193,7 @@ export const AboutForm = ({profile}: AboutFormProps) => {
           <TextArea
             label="About"
             placeholder="Tell simple story about you"
+            icon="uil-file-edit-alt"
             id="about"
             rows={3}
             value={formState?.about}
@@ -201,6 +205,7 @@ export const AboutForm = ({profile}: AboutFormProps) => {
               type="number"
               label="Experience Years"
               placeholder="Experience"
+              icon="uil-bag"
               id="experience_years"
               min={0}
               max={2050}
@@ -212,6 +217,7 @@ export const AboutForm = ({profile}: AboutFormProps) => {
               type="number"
               label="Completed Projects"
               placeholder="Project"
+              icon="uil-archive"
               id="completed_projects"
               min={0}
               max={100}
@@ -223,6 +229,7 @@ export const AboutForm = ({profile}: AboutFormProps) => {
               type="number"
               label="Learning Hours"
               placeholder="Learning"
+              icon="uil-book-alt"
               id="learning_hours"
               min={0}
               max={200}
@@ -233,12 +240,13 @@ export const AboutForm = ({profile}: AboutFormProps) => {
           </div>
         </fieldset>
         <fieldset disabled={isSubmitting}>
-          <legend><i className="uil-phone-alt mr-0-5"></i>Contacts</legend>
+          <legend><i className="uil-whatsapp mr-0-5"></i>Contacts</legend>
           <div className="display-grid col-lg-3 column-gap-2">
             <Input
               type="email"
               label="Email"
               placeholder="Email address"
+              icon="uil-at"
               id="email_address"
               value={formState?.email_address}
               onChange={onInputChange}
@@ -248,6 +256,7 @@ export const AboutForm = ({profile}: AboutFormProps) => {
               type="url"
               label="Website"
               placeholder="Url or address"
+              icon="uil-globe"
               id="website"
               value={formState?.website}
               onChange={onInputChange}
@@ -257,6 +266,7 @@ export const AboutForm = ({profile}: AboutFormProps) => {
               type="tel"
               label="Phone"
               placeholder="Contact number"
+              icon="uil-phone"
               id="phone"
               value={formState?.phone}
               onChange={onInputChange}
@@ -265,12 +275,13 @@ export const AboutForm = ({profile}: AboutFormProps) => {
           </div>
         </fieldset>
         <fieldset disabled={isSubmitting}>
-          <legend><i className="uil-github-alt mr-0-5"></i>Socials</legend>
-          <div className="display-grid col-3-2 column-gap-2">
+          <legend><i className="uil-sitemap mr-0-5"></i>Socials</legend>
+          <div className="display-grid col-2 column-gap-2">
             <Input
               type="url"
               label="Github Url"
               placeholder="Github"
+              icon="uil-github"
               id="github_url"
               value={formState?.github_url}
               onChange={onInputChange}
@@ -280,17 +291,19 @@ export const AboutForm = ({profile}: AboutFormProps) => {
               type="text"
               label="Github Username"
               placeholder="Github Username"
+              icon="uil-github-alt"
               id="github_username"
               value={formState?.github_username}
               onChange={onInputChange}
               errors={errors?.github_username}
             />
           </div>
-          <div className="display-grid col-lg-3 column-gap-2">
+          <div className="display-grid col-lg-2 column-gap-2">
             <Input
               type="url"
               label="Twitter Url"
               placeholder="Twitter"
+              icon="uil-twitter"
               id="twitter_url"
               value={formState?.twitter_url}
               onChange={onInputChange}
@@ -300,21 +313,23 @@ export const AboutForm = ({profile}: AboutFormProps) => {
               type="url"
               label="Instagram Url"
               placeholder="Instagram"
+              icon="uil-instagram"
               id="instagram_url"
               value={formState?.instagram_url}
               onChange={onInputChange}
               errors={errors?.instagram_url}
             />
-            <Input
-              type="url"
-              label="Linkedin Url"
-              placeholder="Linkedin"
-              id="linkedin_url"
-              value={formState?.linkedin_url}
-              onChange={onInputChange}
-              errors={errors?.linkedin_url}
-            />
           </div>
+          <Input
+            type="url"
+            label="Linkedin Url"
+            placeholder="Linkedin"
+            icon="uil-linkedin"
+            id="linkedin_url"
+            value={formState?.linkedin_url}
+            onChange={onInputChange}
+            errors={errors?.linkedin_url}
+          />
           <InputGroup>
             <Button type="submit" disabled={isSubmitting}>Update</Button>
           </InputGroup>

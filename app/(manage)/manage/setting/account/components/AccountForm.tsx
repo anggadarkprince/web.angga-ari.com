@@ -11,7 +11,7 @@ interface AccountFormProps {
   user: UserType
 }
 export const AccountForm = ({user}: AccountFormProps) => {
-  const [name, serName] = useState(user.name);
+  const [name, setName] = useState(user.name);
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -75,7 +75,7 @@ export const AccountForm = ({user}: AccountFormProps) => {
             placeholder="Your name"
             id="name"
             value={name}
-            onChange={e => serName(e.target.value)}
+            onChange={e => setName(e.target.value)}
             errors={errors?.name}
           />
           <div className="display-grid col-md-2 column-gap-1">

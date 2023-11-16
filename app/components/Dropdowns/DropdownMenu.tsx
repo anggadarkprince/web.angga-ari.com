@@ -27,3 +27,4 @@ export const DropdownMenu: React.FC<PropsWithChildren<DropdownMenuProp>> = ({pos
     </div>
   )
 }
+DropdownMenu.displayName = 'DropdownMenu';

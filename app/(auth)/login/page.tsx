@@ -15,7 +15,7 @@ export default async function Login() {
     <main className={clsx('main', styles.auth__main)}>
       <div className={styles.auth__wrapper}>
         <div className={styles.auth__titleWrapper}>
-          <img src="../assets/img/favicon.png" alt="Logo" className={styles.auth__logo}/>
+          <Image src="/assets/img/favicon.png" alt="Logo" width={50} height={50} className={styles.auth__logo}/>
             <div>
               <h1 className={styles.auth__title}>Welcome back!</h1>
               <h3 className={styles.auth__subtitle}>Start managing your landing page</h3>
@@ -34,7 +34,7 @@ export default async function Login() {
             <Image src="/assets/img/github.png" alt="Github" width={20} height={20}/>Github
           </Button>
         </InputGroup>
-        <p className="text-center">Don't you have an account? <Link href="/register">Sign Up</Link></p>
+        <p className="text-center">Don&apos;t you have an account? <Link href="/register">Sign Up</Link></p>
         <p className="text-center text-fade mt-2">&copy; 2023 All Rights Reserved.</p>
       </div>
     </main>
