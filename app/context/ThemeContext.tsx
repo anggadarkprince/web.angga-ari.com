@@ -1,7 +1,6 @@
 "use client"
 
 import {createContext, PropsWithChildren, useCallback, useContext, useEffect, useState} from 'react';
-import {setThemeCookie, clearThemeCookie} from "@/app/actions/cookies";
 
 export const ThemeContext = createContext({
   theme: '',
@@ -19,10 +18,14 @@ export function ThemeContextProvider({theme, children}: PropsWithChildren<{theme
     document.body.classList[theme === "dark" ? "add" : "remove"](darkTheme);
     if (rememberSelection) {
       localStorage.setItem("selected-theme", theme);
-      setThemeCookie(theme);
+      fetch('/api/theme', {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({theme}),
+      }).then(console.log);
     } else {
       localStorage.removeItem("selected-theme");
-      clearThemeCookie();
+      fetch('/api/theme/clear', {method: "POST"}).then(console.log);
     }
     console.log(`Toggle theme from ${getCurrentTheme()} to ${theme} and remember`);
   }, [])
