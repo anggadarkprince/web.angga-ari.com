@@ -12,7 +12,7 @@ interface ModalSectionFormProps {
   modalTitle: string;
   section?: ExpertiseSectionType | null;
   onClose: () => void;
-  onSuccess?: (data: ExpertiseSectionType) => void;
+  onSuccess?: (data: ExpertiseSectionType, isCreated: boolean) => void;
 }
 export const ModalSectionForm = ({show, modalTitle, section, onClose, onSuccess}: ModalSectionFormProps) => {
   const {setSection} = useExpertise();
@@ -34,6 +34,7 @@ export const ModalSectionForm = ({show, modalTitle, section, onClose, onSuccess}
     try {
       setIsSubmitting(true);
       setResult(null);
+      const isCreated = !section?.id;
       const path = section?.id ? `/${section.id}` : '';
       const httpMethod = section?.id ? 'PATCH' : 'POST';
       const response = await fetch(`${API_URL}expertises${path}`, {
@@ -57,7 +58,7 @@ export const ModalSectionForm = ({show, modalTitle, section, onClose, onSuccess}
         setTitle('');
         setSubtitle('');
         setIcon('');
-        onSuccess && onSuccess(result.data);
+        onSuccess && onSuccess(result.data, isCreated);
       } else {
         setResult({
           type: 'error',

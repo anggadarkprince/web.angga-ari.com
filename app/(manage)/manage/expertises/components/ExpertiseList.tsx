@@ -15,6 +15,7 @@ interface ExpertiseListProps {
   expertises: ExpertiseSectionType[],
 }
 export const ExpertiseList = ({expertises}: ExpertiseListProps) => {
+  const [currentExpertises, setCurrentExpertises] = useState(expertises);
   const {
     showSectionForm,
     setShowSectionForm,
@@ -60,12 +61,32 @@ export const ExpertiseList = ({expertises}: ExpertiseListProps) => {
     });
     setIsDeleting(false);
     setShowModalDelete(false);
-    router.refresh();
+    setCurrentExpertises(currentExpertises.filter(section => {
+      return section.id !== deleteId;
+    }).map(section => {
+      return {
+        ...section,
+        expertises: section.expertises.filter(expertise => expertise.id !== deleteId)
+      };
+    }));
   }
 
-  const onUpdateSection = (section: ExpertiseSectionType) => {
+  const onUpdateSection = (section: ExpertiseSectionType, isCreated: boolean) => {
     setShowSectionForm(false);
-    router.refresh();
+    if (isCreated) {
+      setCurrentExpertises([
+        ...currentExpertises,
+        section
+      ]);
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    } else {
+      setCurrentExpertises(currentExpertises.map(item => {
+        if (item.id === section.id) {
+          return section;
+        }
+        return item;
+      }));
+    }
   }
 
   const onEditSection = (section: ExpertiseSectionType) => {
@@ -85,14 +106,34 @@ export const ExpertiseList = ({expertises}: ExpertiseListProps) => {
     setSectionId(expertise.sectionId);
   }
 
-  const onUpdateExpertise = (expertise: ExpertiseType) => {
+  const onUpdateExpertise = (expertise: ExpertiseType, isCreated: boolean) => {
     setShowExpertiseForm(false);
-    router.refresh();
+    setCurrentExpertises(currentExpertises.map(item => {
+      if (item.id === expertise.sectionId) {
+        if (isCreated) {
+          return {
+            ...item,
+            expertises: [...item.expertises, expertise]
+          };
+        } else {
+          return {
+            ...item,
+            expertises: item.expertises.map(expertiseItem => {
+              if (expertiseItem.id === expertise.id) {
+                return expertise;
+              }
+              return expertiseItem;
+            })
+          };
+        }
+      }
+      return item;
+    }));
   }
 
   return (
     <>
-      {expertises.map(section => (
+      {currentExpertises.map(section => (
         <ExpertiseSection
           key={`section-${section.id}`}
           title={section.title}

@@ -14,7 +14,7 @@ interface ModalExpertiseFormProps {
   sectionId?: number | null;
   expertise?: ExpertiseType | null;
   onClose: () => void;
-  onSuccess?: (data: ExpertiseType) => void;
+  onSuccess?: (data: ExpertiseType, isCreated: boolean) => void;
 }
 export const ModalExpertiseForm = ({show, modalTitle, sectionId, expertise, onClose, onSuccess}: ModalExpertiseFormProps) => {
   const {setExpertise} = useExpertise();
@@ -36,6 +36,7 @@ export const ModalExpertiseForm = ({show, modalTitle, sectionId, expertise, onCl
     try {
       setIsSubmitting(true);
       setResult(null);
+      const isCreated = !expertise?.id;
       const path = expertise?.id ? `/${expertise.id}` : '';
       const httpMethod = expertise?.id ? 'PATCH' : 'POST';
       const response = await fetch(`${API_URL}expertises${path}`, {
@@ -60,7 +61,17 @@ export const ModalExpertiseForm = ({show, modalTitle, sectionId, expertise, onCl
         setTitle('');
         setSubtitle('');
         setLevel(0);
-        onSuccess && onSuccess(result.data);
+        onSuccess && onSuccess(new class implements ExpertiseType {
+          createdAt: Date = result.data.created_at;
+          icon: string | null = result.data.icon;
+          id: number = result.data.id;
+          level: number = result.data.level;
+          sectionId: number | null = result.data.section_id;
+          subtitle: string = result.data.subtitle;
+          title: string = result.data.title;
+          updatedAt: Date | null = result.data.updated_at;
+          userId: number = result.data.user_id;
+        }, isCreated);
       } else {
         setResult({
           type: 'error',
