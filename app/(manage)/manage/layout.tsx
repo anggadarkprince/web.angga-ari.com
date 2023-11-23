@@ -7,9 +7,6 @@ import React from "react";
 import {ThemeContextProvider} from "@/app/context/ThemeContext";
 import {cookies} from "next/headers";
 import {clsx} from "clsx";
-import {Sidebar} from "@/app/(manage)/manage/components/Layouts/Sidebar";
-import {Header} from "@/app/(manage)/manage/components/Layouts/Header";
-import {Footer} from "@/app/(manage)/manage/components/Layouts/Footer";
 import {ContentWrapper} from "@/app/(manage)/manage/components/Layouts/ContentWrapper";
 
 const poppins = Poppins({
@@ -38,6 +35,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
             {children}
           </ContentWrapper>
         </main>
+        <div id="modal-root"></div>
       </body>
     </ThemeContextProvider>
     </html>

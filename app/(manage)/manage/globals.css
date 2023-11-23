@@ -17,11 +17,17 @@
     --secondary-color-alt: hsl(var(--hue-color-secondary), 70%, 55%);
     --secondary-color-lighter: hsl(var(--hue-color-secondary), 92%, 85%);
     --error-color: #d54f4f;
+    --error-color-alt: #c24141;
     --error-color-lighter: #ffbbbb;
     --success-color: #22c55e;
+    --success-color-alt: #18af50;
     --success-color-lighter: #a1ffc5;
     --warning-color: #fb923c;
+    --warning-color-alt: #e17b28;
+    --warning-color-lighter: #fdd3b3;
     --info-color: #0ea5e9;
+    --info-color-alt: #088dcb;
+    --info-color-lighter: #b9eeff;
     --title-color: hsl(var(--hue-color), 8%, 10%);
     --text-color: hsl(var(--hue-color), 8%, 20%);
     --text-color-slate: hsl(var(--hue-color), 8%, 45%);
