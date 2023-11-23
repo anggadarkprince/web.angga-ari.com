@@ -1,0 +1,63 @@
+.form__radio {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    font-size: var(--normal-font-size);
+    color: var(--text-color);
+    line-height: 20px;
+}
+.form__radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.form__radio ~ .form__radio {
+    margin-left: 20px;
+}
+.form__radio label {
+    display: flex;
+}
+.form__radio label:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: var(--input-color);
+    border: 2px solid var(--text-color-lighter);
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.form__radio:hover input ~ label:before {
+    background-color: var(--input-color-darker);
+}
+
+/* When the checkbox is checked, add background */
+.form__radio input:checked ~ label:before {
+    background-color: var(--primary-color);
+    border-color: transparent;
+}
+.form__radio input:focus ~ label:before {
+    border-color: var(--primary-color);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.form__radio label:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.form__radio input:checked ~ label:after {
+    display: block;
+}

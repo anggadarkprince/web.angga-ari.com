@@ -1,0 +1,37 @@
+.modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1051;
+    display: none;
+    outline: 0;
+    transition: opacity .15s linear;
+}
+.modal.show {
+    display: block;
+}
+.modal__wrapper {
+    max-width: 500px;
+    margin: 1.8rem auto;
+    background-color: var(--body-color);
+    box-shadow: 0 2px 5px var(--color-shadow);
+    border-radius: 0.3rem;
+}
+.modal__overlay {
+    z-index: 1050;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    transition: opacity .15s linear;
+    opacity: 0;
+}
+.modal__overlay.show {
+    opacity: .5;
+}

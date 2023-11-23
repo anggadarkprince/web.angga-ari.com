@@ -1,3 +1,5 @@
+"use client"
+
 import styles from './DropdownItem.module.css';
 import {clsx} from "clsx";
 import React, {CSSProperties, MouseEventHandler, PropsWithChildren} from "react";

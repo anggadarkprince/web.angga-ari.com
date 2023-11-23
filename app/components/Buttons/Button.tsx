@@ -2,10 +2,11 @@ import React, {ButtonHTMLAttributes, PropsWithChildren} from "react";
 import styles from './Button.module.css';
 import {clsx} from "clsx";
 import Link from "next/link";
+import {SizeType, VariantType} from "@/app/types";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'error' | 'danger' | 'success' | 'white',
-  size?: 'small' | 'medium' | 'large',
+  variant?: VariantType,
+  size?: SizeType,
   full?: boolean,
   href?: string,
   target?: string,
@@ -20,6 +21,7 @@ export const Button = (props: ButtonProps) => {
     className,
     href,
     target,
+    type = "button",
     children,
     ...rest
   } = props;
@@ -44,7 +46,7 @@ export const Button = (props: ButtonProps) => {
       </Link>
     )
   } else {
-    return <button {...wrapperProps}>{children}</button>;
+    return <button type={type} {...wrapperProps}>{children}</button>;
   }
 }
 Button.displayName = 'Button';

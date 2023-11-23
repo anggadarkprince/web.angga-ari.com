@@ -3,6 +3,7 @@ import {Prisma} from "@prisma/client";
 export interface ExpertiseSectionType extends Prisma.ExpertiseGetPayload<{
   include: {expertises: true}
 }>{}
+export interface ExpertiseType extends Prisma.ExpertiseGetPayload<{}>{}
 
 export interface ExperienceType extends Prisma.ExperienceGetPayload<{}>{}
 export interface ProfileType extends Prisma.ProfileGetPayload<{}>{}
@@ -39,3 +40,6 @@ export interface SettingType {
   keywords: string;
   description: string;
 }
+
+export type VariantType = 'primary' | 'success' | 'danger' | 'error' | 'warning' | 'info' | 'white';
+export type SizeType = 'small' | 'medium' | 'large';

@@ -3,8 +3,9 @@
     border: none;
     font-size: var(--normal-font-size);
     font-family: var(--body-font);
+    cursor: pointer;
 }
-.dropdown__toggle:not(.no-arrow):after {
+.arrow:after {
     content: '\eb3a';
     font-family: unicons-line;
     font-style: normal;

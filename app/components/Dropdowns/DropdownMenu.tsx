@@ -7,18 +7,16 @@ import {useDropdown} from "@/app/components/Dropdowns/Dropdown";
 
 interface DropdownMenuProp {
   positionRight?: boolean;
-  spaceTight?: boolean;
   className?: string;
   style?: CSSProperties;
 }
-export const DropdownMenu: React.FC<PropsWithChildren<DropdownMenuProp>> = ({positionRight = false, spaceTight = false, className, style, children}) => {
+export const DropdownMenu: React.FC<PropsWithChildren<DropdownMenuProp>> = ({positionRight = false, className, style, children}) => {
   const { isOpen } = useDropdown();
   return (
     <div className={
       clsx(
         styles.dropdown__menu,
         positionRight && styles.dropdown__menuRight,
-        spaceTight && styles.dropdown__menuRight,
         isOpen && styles.open,
         className
       )
