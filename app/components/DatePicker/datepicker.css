@@ -1,0 +1,65 @@
+.datepicker {
+    font-family: var(--body-font);
+}
+.datepicker.react-datepicker-popper[data-placement^="bottom"] {
+    padding-top: 0;
+}
+.datepicker.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before {
+    border-bottom-color: var(--text-color-lighter) !important;
+}
+.datepicker.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::after {
+    border-bottom-color: var(--container-color) !important;
+}
+.datepicker.react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before {
+    border-top-color: var(--text-color-lighter) !important;
+}
+.datepicker.react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::after {
+    border-top-color: var(--container-color) !important;
+}
+.datepicker .react-datepicker {
+    font-family: var(--body-font);
+    border-color: var(--text-color-lighter);
+}
+.datepicker .react-datepicker__header {
+    border-bottom-color: var(--text-color-lighter);
+    padding: 12px 0;
+    background-color: var(--container-color);
+}
+.datepicker .react-datepicker__current-month,
+.datepicker .react-datepicker-time__header,
+.datepicker .react-datepicker-year-header,
+.datepicker .react-datepicker__day-name,
+.datepicker .react-datepicker__day,
+.datepicker .react-datepicker__time-name {
+    color: var(--text-color);
+}
+.datepicker .react-datepicker__navigation {
+    top: 10px;
+}
+.datepicker .react-datepicker__day--selected {
+    background-color: var(--primary-color-lighter);
+}
+.datepicker .react-datepicker__day--selected:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+.react-datepicker__tab-loop {
+    position: absolute;
+    top: 0;
+}
+
+.datepicker-clear-button {
+    height: auto;
+    top: 12px;
+    padding-right: 8px;
+}
+.datepicker-clear-button.with-label {
+    top: 39px;
+}
+.datepicker-clear-button:after {
+    background-color: var(--primary-color-lighter);
+    padding: 0;
+}
+.datepicker-clear-button:hover:after {
+    background-color: var(--primary-color);
+}

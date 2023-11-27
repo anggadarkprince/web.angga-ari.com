@@ -17,11 +17,11 @@ export interface UserType extends Prisma.UserGetPayload<{}>{}
 export interface ApiError {
   [name: string | number]: string | string[]
 }
-export interface ApiResponse<T> {
+export interface ApiResponse<T = null> {
   code?: number,
   status?: string,
   message?: string,
-  data?: null | Array<T> | T,
+  data?: T,
   errors: ApiError | string,
   myObject: Record<string, object[] | string>
 }
