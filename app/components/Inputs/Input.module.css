@@ -51,3 +51,8 @@ fieldset:disabled .form__input {
 .form__inputIcon ~ .form__input {
     padding-left: 2.2rem;
 }
+
+.icon__small {
+    line-height: 35px;
+    font-size: var(--small-font-size);
+}

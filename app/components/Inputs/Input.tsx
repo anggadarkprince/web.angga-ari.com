@@ -10,7 +10,7 @@ type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 
 export interface InputProps extends InputHTMLAttributes<FormControlElement>, TextareaHTMLAttributes<FormControlElement> {
   as?: 'input' | 'textarea',
-  label?: string,
+  label?: string | React.ReactElement | React.ReactElement[],
   inputSize?: 'small' | 'medium' | 'large',
   icon?: string,
   borderless?: boolean,
@@ -21,10 +21,10 @@ export const Input = React.forwardRef(({as: Component = 'input', label, inputSiz
   return (
     <InputGroup>
       {label && <label htmlFor={rest.id} className={styles.form__label}>{label}</label>}
-      {icon && <label className={clsx(icon, styles.form__inputIcon)} htmlFor={rest.id}></label>}
+      {icon && <label className={clsx(icon, styles.form__inputIcon, styles[`icon__${inputSize}`])} htmlFor={rest.id}></label>}
       <Component
         ref={ref}
-        className={clsx(styles.form__input, inputSize && `input__${inputSize}`, borderless && styles.form_inputBorderless)}
+        className={clsx(styles.form__input, inputSize && styles[`input__${inputSize}`], borderless && styles.form_inputBorderless)}
         {...rest}
       />
       <FormMessage errors={errors} errorKey={errorKey} as={'text'} />

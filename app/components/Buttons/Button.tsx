@@ -1,4 +1,4 @@
-import React, {ButtonHTMLAttributes, PropsWithChildren} from "react";
+import React, {ButtonHTMLAttributes} from "react";
 import styles from './Button.module.css';
 import {clsx} from "clsx";
 import Link from "next/link";
@@ -11,6 +11,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string,
   target?: string,
   active?: boolean
+  autoHeight?: boolean
 }
 export const Button = (props: ButtonProps) => {
   const {
@@ -22,6 +23,7 @@ export const Button = (props: ButtonProps) => {
     href,
     target,
     type = "button",
+    autoHeight = false,
     children,
     ...rest
   } = props;
@@ -31,6 +33,7 @@ export const Button = (props: ButtonProps) => {
       styles.button,
       className,
       full && 'width-full',
+      autoHeight && 'height-auto',
       styles[`button__${variant}`],
       styles[`button__${size}`],
       active && 'active',
