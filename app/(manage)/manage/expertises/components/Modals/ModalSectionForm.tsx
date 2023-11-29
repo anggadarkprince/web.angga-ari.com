@@ -6,6 +6,8 @@ import React, {FormEventHandler, useEffect, useState} from "react";
 import {API_URL} from "@/app/utility/constants";
 import {Alert, AlertVariant} from "@/app/components/Alert";
 import {useExpertise} from "@/app/(manage)/manage/expertises/context/ExpertiseContext";
+import icons from "@/app/utility/icons";
+import parse from 'html-react-parser';
 
 interface ModalSectionFormProps {
   show: boolean;
@@ -18,7 +20,9 @@ export const ModalSectionForm = ({show, modalTitle, section, onClose, onSuccess}
   const {setSection} = useExpertise();
   const [title, setTitle] = useState(section?.title || '');
   const [subtitle, setSubtitle] = useState(section?.subtitle || '');
+  const [searchIcon, setSearchIcon] = useState(section?.icon || '');
   const [icon, setIcon] = useState(section?.icon || '');
+  const [filteredIcons, setFilteredIcons] = useState(icons || []);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [result, setResult] = useState<FormResult | null>(null);
   const errors = result?.response?.errors as ApiError;
@@ -81,6 +85,10 @@ export const ModalSectionForm = ({show, modalTitle, section, onClose, onSuccess}
     onClose && onClose();
   }
 
+  useEffect(() => {
+    setFilteredIcons(icons.filter(iconName => iconName.includes(searchIcon)))
+  }, [searchIcon]);
+
   return (
     <Modal show={show}>
       <form method="post" onSubmit={onSubmit}>
@@ -109,12 +117,32 @@ export const ModalSectionForm = ({show, modalTitle, section, onClose, onSuccess}
               errors={errors?.subtitle}
             />
             <Input
-              label={"Icon"}
-              placeholder={"Section icon"}
-              value={icon}
-              onChange={e => setIcon(e.target.value)}
+              label={parse(`Icon: <strong>${icon}</strong>`) || undefined}
+              inputSize={"small"}
+              placeholder={"Search section icon"}
+              value={searchIcon}
+              icon={"uil-search"}
+              borderless={true}
+              onChange={e => setSearchIcon(e.target.value)}
               errors={errors?.icon}
             />
+            <div className={"mb-1"}>
+              <div className={"display-grid col-6 gap-1 pr-1"} style={{maxHeight: 200, overflowY: 'auto'}}>
+                {filteredIcons.map(iconClass => {
+                  return (
+                    <Button
+                      key={iconClass}
+                      variant={iconClass == icon ? "primary" : "white"}
+                      size={"large"} className="text-h3"
+                      autoHeight={true} onClick={() => setIcon(iconClass)}
+                    >
+                      <i className={iconClass}></i>
+                    </Button>
+                  )
+                })}
+              </div>
+              {filteredIcons.length === 0 && <p className="text-fade text-small text-center">No icon found with keyword <strong>"{searchIcon}"</strong></p>}
+            </div>
           </ModalBody>
           <ModalFooter>
             <Button variant={"white"} onClick={onModalClose}>Cancel</Button>

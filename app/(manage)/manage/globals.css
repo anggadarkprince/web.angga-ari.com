@@ -419,6 +419,9 @@ fieldset legend {
 .width-full {
     width: 100% !important;
 }
+.height-auto {
+    height: auto !important;
+}
 
 .text-h1 {
     font-size: var(--h1-font-size) !important;
