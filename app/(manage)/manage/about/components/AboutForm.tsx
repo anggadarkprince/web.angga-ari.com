@@ -1,7 +1,7 @@
 "use client"
 
 import React, {ChangeEventHandler, FormEventHandler, useReducer} from "react";
-import {Input, InputGroup, TextArea} from "@/app/components/Inputs";
+import {Input, InputGroup, TextArea, TextEditor} from "@/app/components/Inputs";
 import {Button} from "@/app/components/Buttons";
 import {ApiError, FormResult, ProfileType} from "@/app/types";
 import {API_URL} from "@/app/utility/constants";
@@ -95,7 +95,8 @@ export const AboutForm = ({profile}: AboutFormProps) => {
   const {form: formState, result, isSubmitting} = state;
   const errors = result?.response?.errors as ApiError;
 
-  const onInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const onInputChange: ChangeEventHandler<any> = (e) => {
+    console.log(e.target.name || e.target.id)
     dispatch({
       type: Action.INPUT_CHANGE,
       payload: {
@@ -190,12 +191,10 @@ export const AboutForm = ({profile}: AboutFormProps) => {
             onChange={onInputChange}
             errors={errors?.tagline}
           />
-          <TextArea
+          <TextEditor
             label="About"
             placeholder="Tell simple story about you"
-            icon="uil-file-edit-alt"
             id="about"
-            rows={3}
             value={formState?.about}
             onChange={onInputChange}
             errors={errors?.about}

@@ -21,6 +21,7 @@
     "react": "^18",
     "react-datepicker": "^4.23.0",
     "react-dom": "^18",
+    "react-simple-wysiwyg": "^2.2.5",
     "server-only": "^0.0.1",
     "sharp": "^0.32.6"
   },
