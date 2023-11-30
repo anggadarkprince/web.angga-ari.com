@@ -12,7 +12,11 @@ export const ContentWrapper = ({sidebarCollapse = false, children}: PropsWithChi
 
   const onSidebarCollapse = async () => {
     setIsCollapse(!isCollapse);
-    await setSidebarCollapseCookie(!isCollapse);
+    fetch('/api/sidebar', {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({collapse: !isCollapse}),
+    }).then(console.log);
   }
 
   return (
