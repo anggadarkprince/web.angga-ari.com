@@ -172,7 +172,7 @@ export const ExpertiseList = ({expertises}: ExpertiseListProps) => {
       />
       <ModalExpertiseForm
         show={showExpertiseForm}
-        modalTitle={`${section ? 'Edit' : 'Create'} Expertise`}
+        modalTitle={`${expertise ? 'Edit' : 'Create'} Expertise`}
         sectionId={sectionId}
         expertise={expertise}
         onClose={() => setShowExpertiseForm(false)}

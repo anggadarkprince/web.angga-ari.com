@@ -184,6 +184,12 @@ fieldset legend {
 .color-white {
     color: white;
 }
+.color-text {
+    color: var(--text-color);
+}
+.color-body {
+    color: var(--body-color);
+}
 
 .bg-primary {
     background: var(--primary-color);

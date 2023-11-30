@@ -19,11 +19,15 @@
 .datepicker .react-datepicker {
     font-family: var(--body-font);
     border-color: var(--text-color-lighter);
+    background: var(--container-color);
 }
 .datepicker .react-datepicker__header {
     border-bottom-color: var(--text-color-lighter);
     padding: 12px 0;
     background-color: var(--container-color);
+}
+.datepicker .react-datepicker__children-container {
+    width: auto;
 }
 .datepicker .react-datepicker__current-month,
 .datepicker .react-datepicker-time__header,
@@ -33,13 +37,20 @@
 .datepicker .react-datepicker__time-name {
     color: var(--text-color);
 }
+.datepicker .react-datepicker__day--disabled,
+.datepicker .react-datepicker__month-text--disabled,
+.datepicker .react-datepicker__quarter-text--disabled,
+.datepicker .react-datepicker__year-text--disabled {
+    color: var(--text-color-lighter);
+}
 .datepicker .react-datepicker__navigation {
     top: 10px;
 }
 .datepicker .react-datepicker__day--selected {
     background-color: var(--primary-color-lighter);
 }
-.datepicker .react-datepicker__day--selected:hover {
+.datepicker .react-datepicker__day--selected:hover,
+.datepicker .react-datepicker__day--keyboard-selected:hover {
     background-color: var(--primary-color);
     color: white;
 }

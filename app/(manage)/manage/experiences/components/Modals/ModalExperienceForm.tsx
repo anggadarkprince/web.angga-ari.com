@@ -2,11 +2,13 @@ import {Modal, ModalBody, ModalFooter, ModalHeader} from "@/app/components/Modal
 import {Button} from "@/app/components/Buttons";
 import {Input} from "@/app/components/Inputs";
 import {ApiError, ExperienceType, FormResult} from "@/app/types";
-import React, {FormEventHandler, useEffect, useState} from "react";
+import React, {FormEventHandler, useEffect, useRef, useState} from "react";
 import {API_URL} from "@/app/utility/constants";
 import {Alert, AlertVariant} from "@/app/components/Alert";
 import {dateFormat} from "@/app/utility/helpers";
 import {DatePicker} from "@/app/components/DatePicker";
+import ReactDatePicker from "react-datepicker";
+import {format, parseISO} from "date-fns";
 
 interface FormPayloadType {
   label: string;
@@ -32,6 +34,7 @@ export const ModalExperienceForm = ({show, modalTitle, experience, onClose, onSu
   const [from, setFrom] = useState(dateFormat(experience?.from || '', 'yyyy-MM-dd') || '');
   const [to, setTo] = useState(dateFormat(experience?.to || '', 'yyyy-MM-dd') || '');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const toPickerRef = useRef<ReactDatePicker>(null);
   const [result, setResult] = useState<FormResult | null>(null);
   const errors = result?.response?.errors as ApiError;
 
@@ -41,7 +44,7 @@ export const ModalExperienceForm = ({show, modalTitle, experience, onClose, onSu
     setSubtitle(experience?.subtitle || '');
     setUrl(experience?.url || '');
     setFrom(dateFormat(experience?.from || '', 'yyyy-MM-dd') || '');
-    setTo(dateFormat(experience?.to || '', 'yyyy-MM-dd') || '');
+    setTo(dateFormat(experience?.to || '', 'yyyy-MM-dd') || 'Now');
   }, [experience]);
 
   const onSubmit: FormEventHandler = async (e) => {
@@ -61,7 +64,7 @@ export const ModalExperienceForm = ({show, modalTitle, experience, onClose, onSu
           subtitle,
           url: url ? url : null,
           from,
-          to,
+          to: to === 'Now' ? '' : to,
         }),
         credentials: "include",
       });
@@ -148,17 +151,36 @@ export const ModalExperienceForm = ({show, modalTitle, experience, onClose, onSu
                 required={true}
                 id={"date-from"}
                 value={from}
+                maxDate={new Date()}
                 onChange={e => setFrom(e.target.value)}
                 errors={errors?.from}
               />
               <DatePicker
-                label={"To (Empty for \"now\")"}
+                ref={toPickerRef}
+                label={"To"}
                 placeholder={"Date to"}
                 id={"date-to"}
-                value={to}
-                onChange={e => setTo(e.target.value)}
+                defaultValue={to}
+                minDate={parseISO(from)}
+                maxDate={new Date()}
                 isClearable={true}
-              />
+                onDateChange={date => {
+                  if (!date) {
+                    setTo('');
+                  } else {
+                    setTo(format(date, 'yyyy-MM-dd'))
+                  }
+                }}
+              >
+                <div>
+                  <Button size={"small"} full={true} onClick={() => {
+                    toPickerRef.current?.setOpen(false);
+                    setTo('Now');
+                  }}>
+                    Until Today
+                  </Button>
+                </div>
+              </DatePicker>
             </div>
           </ModalBody>
           <ModalFooter>

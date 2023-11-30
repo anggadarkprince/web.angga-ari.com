@@ -4,7 +4,7 @@ export const delay = (ms: number = 0) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export const dateFormat = (date: Date | string | null | undefined, dateFormat: string) => {
+export const dateFormat = (date: Date | string | number | null | undefined, dateFormat: string) => {
   if (date === null) {
     return null;
   }

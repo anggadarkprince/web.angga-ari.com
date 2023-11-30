@@ -2,7 +2,7 @@ import {ChangeEventHandler, forwardRef, HTMLProps, Ref, useState} from "react";
 import ReactDatePicker, {ReactDatePickerProps} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.css";
-import {parseISO} from "date-fns";
+import {parseISO, setDefaultOptions} from "date-fns";
 import {Input} from "@/app/components/Inputs";
 import {InputProps} from "@/app/components/Inputs/Input";
 import * as React from "react";
@@ -26,7 +26,7 @@ interface DatePickerProps extends Omit<ReactDatePickerProps, 'onChange' | 'value
   errors?: ApiError | null | string | string[],
   errorKey?: string,
 }
-export const DatePicker = ({
+export const DatePicker = forwardRef(({
    selected,
    value,
    defaultValue,
@@ -39,19 +39,20 @@ export const DatePicker = ({
    onDateChange,
    dateFormat = 'yyyy-MM-dd',
    ...rest
-}: DatePickerProps) => {
-  const defaultValueDate = defaultValue ? (defaultValue instanceof Date ? defaultValue : parseISO(defaultValue)) : null;
+}: DatePickerProps, ref: Ref<ReactDatePicker>) => {
+  //const defaultValueDate = defaultValue ? (defaultValue instanceof Date ? defaultValue : parseISO(defaultValue)) : null;
   const valueDate = value ? (value instanceof Date ? value : parseISO(value)) : (selected ? selected : null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(valueDate);
 
-  const DateInput = forwardRef(({value, onClick}: HTMLProps<HTMLInputElement>, ref: Ref<InputProps>) => {
+  const DateInput = forwardRef(({value: updatedValue, onClick}: HTMLProps<HTMLInputElement>, ref: Ref<InputProps>) => {
     const valueAttributes: InputProps = {}
-    if (value) {
-      valueAttributes.value = value;
+    if (value !== undefined) {
+      valueAttributes.value = updatedValue;
     }
-    if (defaultValueDate) {
-      const format = (Array.isArray(dateFormat) ? dateFormat[0] : dateFormat) || 'yyyy-MM-dd';
-      valueAttributes.defaultValue = formatter(defaultValueDate, format) || '';
+    if (defaultValue !== undefined) {
+      //const format = (Array.isArray(dateFormat) ? dateFormat[0] : dateFormat) || 'yyyy-MM-dd';
+      //valueAttributes.defaultValue = formatter(updatedValue as string, format) || '';
+      valueAttributes.defaultValue = defaultValue as string;
     }
     return (
       <Input
@@ -87,6 +88,7 @@ export const DatePicker = ({
   return (
     <>
       <ReactDatePicker
+        ref={ref}
         selected={selected || selectedDate || valueDate}
         onChange={(date, e) => {
           setSelectedDate(date);
@@ -105,4 +107,5 @@ export const DatePicker = ({
       />
     </>
   )
-}
+});
+DatePicker.displayName = 'DatePicker';

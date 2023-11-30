@@ -22,7 +22,7 @@ export const ExperienceItem = ({label, title, subtitle, from, to, onEdit, onDele
         <p className={styles.experience__period}>{dateFormat(from, 'yyyy')} - {to ? dateFormat(to, 'yyyy') : 'Now'}</p>
       </div>
       <Dropdown>
-        <DropdownToggle noArrow={true}><i className="uil-ellipsis-v"></i></DropdownToggle>
+        <DropdownToggle noArrow={true}><i className="uil-ellipsis-v color-text"></i></DropdownToggle>
         <DropdownMenu positionRight={true}>
           <DropdownItem icon="uil-pen" title="Edit" onClick={onEdit}/>
           <DropdownItem icon="uil-trash" title="Delete" onClick={onDelete}/>
