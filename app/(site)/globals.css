@@ -200,6 +200,15 @@ fieldset:disabled .button {
 .color-primary {
   color: var(--primary-color);
 }
+.color-text {
+  color: var(--text-color);
+}
+.color-title {
+  color: var(--title-color);
+}
+.color-body {
+  color: var(--body-color);
+}
 .weight-medium {
   font-weight: var(--font-medium);
 }
@@ -312,6 +321,9 @@ fieldset:disabled .button {
 }
 .align-item-center {
   align-items: center;
+}
+.justify-content-center {
+  justify-content: center;
 }
 .width-full {
   width: 100%;

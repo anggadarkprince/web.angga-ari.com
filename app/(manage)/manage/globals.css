@@ -187,6 +187,9 @@ fieldset legend {
 .color-text {
     color: var(--text-color);
 }
+.color-title {
+    color: var(--title-color);
+}
 .color-body {
     color: var(--body-color);
 }

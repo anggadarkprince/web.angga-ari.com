@@ -13,7 +13,16 @@ const nextConfig = {
                 pathname: "**"
             },
         ]
-    }
+    },
+    async redirects() {
+        return [
+            {
+                source: '/manage',
+                destination: '/manage/dashboard',
+                permanent: true,
+            },
+        ]
+    },
 }
 
 module.exports = nextConfig
