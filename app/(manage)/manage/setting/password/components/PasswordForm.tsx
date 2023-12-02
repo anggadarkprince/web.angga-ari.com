@@ -1,22 +1,27 @@
 "use client"
 
-import React, {FormEventHandler, useState} from "react";
+import React, {useState} from "react";
 import {Input, InputGroup} from "@/app/components/Inputs";
 import {Button} from "@/app/components/Buttons";
 import {ApiError, FormResult, UserType} from "@/app/types";
 import {API_URL} from "@/app/utility/constants";
 import {Alert, AlertVariant} from "@/app/components/Alert";
+import {Form, FormSubmitHandler} from "@/app/components/Form/Form";
+import * as z from "zod";
+
+const schema = z.object({
+  currentPassword: z.string().min(1, 'Current password is required').max(50),
+  newPassword: z.string().min(1, 'New password is required').max(50),
+  confirmPassword: z.string().min(1, 'Confirm password is required').max(50),
+});
 
 export const PasswordForm = () => {
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const defaultValues = {currentPassword: '', newPassword: '', confirmPassword: ''};
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [result, setResult] = useState<FormResult<UserType> | null>(null);
   const errors = result?.response?.errors as ApiError;
 
-  const onSubmit: FormEventHandler = async (e) => {
-    e.preventDefault();
+  const onSubmit: FormSubmitHandler<typeof defaultValues> = async (formData, form) => {
     try {
       setIsSubmitting(true);
       setResult(null);
@@ -25,18 +30,14 @@ export const PasswordForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          currentPassword,
-          newPassword,
-          confirmPassword
-        }),
+        body: JSON.stringify(formData),
         credentials: "include",
       });
       const result = await response.json();
       if (response.ok) {
-        setCurrentPassword('');
-        setNewPassword('');
-        setConfirmPassword('');
+        form.setValue('currentPassword', '');
+        form.setValue('newPassword', '');
+        form.setValue('confirmPassword', '');
         setResult({
           type: 'success',
           message: result?.message || 'Your password successfully updated',
@@ -68,42 +69,37 @@ export const PasswordForm = () => {
         </Alert>
       )}
 
-      <form method="post" onSubmit={onSubmit}>
-        <fieldset disabled={isSubmitting}>
+      <Form onSubmit={onSubmit} schema={schema} disabled={isSubmitting} defaultValues={defaultValues}>
+        <Input
+          type="password"
+          label="Current Password"
+          placeholder="Old password"
+          id="password"
+          name={"currentPassword"}
+          errors={errors?.currentPassword}
+        />
+        <div className="display-grid col-md-2 column-gap-1">
           <Input
             type="password"
-            label="Current Password"
-            placeholder="Old password"
-            id="password"
-            value={currentPassword}
-            onChange={e => setCurrentPassword(e.target.value)}
-            errors={errors?.currentPassword}
+            label="New Password"
+            placeholder="New password"
+            id="new_password"
+            name={"newPassword"}
+            errors={errors?.newPassword}
           />
-          <div className="display-grid col-md-2 column-gap-1">
-            <Input
-              type="password"
-              label="New Password"
-              placeholder="New password"
-              id="new_password"
-              value={newPassword}
-              onChange={e => setNewPassword(e.target.value)}
-              errors={errors?.newPassword}
-            />
-            <Input
-              type="password"
-              label="Confirm Password"
-              placeholder="Confirm password"
-              id="confirm_password"
-              value={confirmPassword}
-              onChange={e => setConfirmPassword(e.target.value)}
-              errors={errors?.confirmPassword}
-            />
-          </div>
-          <InputGroup className="text-right">
-            <Button type="submit" variant="danger" disabled={isSubmitting}>Change Password</Button>
-          </InputGroup>
-        </fieldset>
-      </form>
+          <Input
+            type="password"
+            label="Confirm Password"
+            placeholder="Confirm password"
+            id="confirm_password"
+            name={"confirmPassword"}
+            errors={errors?.confirmPassword}
+          />
+        </div>
+        <InputGroup className="text-right">
+          <Button type="submit" variant="danger" disabled={isSubmitting}>Change Password</Button>
+        </InputGroup>
+      </Form>
     </>
   )
 }

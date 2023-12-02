@@ -1,10 +1,13 @@
+"use client"
+
 import styles from './Input.module.css';
-import React, {ForwardedRef, InputHTMLAttributes, TextareaHTMLAttributes} from "react";
+import React, {ForwardedRef, InputHTMLAttributes, TextareaHTMLAttributes, useImperativeHandle} from "react";
 import {FormMessage} from "@/app/components/Form/FormMessage";
 import {ApiError} from "@/app/types";
 import {InputGroup} from "@/app/components/Inputs/InputGroup";
 import {clsx} from "clsx";
-import {About} from "@/app/(site)/components/About/About";
+import {useFormContext} from "react-hook-form";
+import {joinErrors} from "@/app/utility/helpers";
 
 type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 
@@ -18,16 +21,23 @@ export interface InputProps extends InputHTMLAttributes<FormControlElement>, Tex
   errorKey?: string,
 }
 export const Input = React.forwardRef(({as: Component = 'input', label, inputSize, icon, borderless = false, errors, errorKey, ...rest}: InputProps, ref: ForwardedRef<any>) => {
+  const formContext = useFormContext();
+  const {ref: inputRef, ...inputRest} = formContext ? formContext.register(rest.name || '') : {ref: null};
+  const inputErrors = joinErrors((formContext ? formContext.formState.errors[rest?.name || '']?.message : '') as string, errors);
+
+  useImperativeHandle(inputRef, () => ref);
+
   return (
     <InputGroup>
       {label && <label htmlFor={rest.id} className={styles.form__label}>{label}</label>}
       {icon && <label className={clsx(icon, styles.form__inputIcon, styles[`icon__${inputSize}`])} htmlFor={rest.id}></label>}
       <Component
-        ref={ref}
+        ref={inputRef || ref}
         className={clsx(styles.form__input, inputSize && styles[`input__${inputSize}`], borderless && styles.form_inputBorderless)}
         {...rest}
+        {...inputRest}
       />
-      <FormMessage errors={errors} errorKey={errorKey} as={'text'} />
+      <FormMessage errors={inputErrors || errors} errorKey={errorKey} as={'text'} />
     </InputGroup>
   )
 });

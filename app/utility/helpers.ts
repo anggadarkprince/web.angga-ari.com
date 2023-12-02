@@ -1,4 +1,5 @@
 import {format, parseISO} from "date-fns";
+import {FieldErrors, FieldValues} from "react-hook-form";
 
 export const delay = (ms: number = 0) => {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -18,4 +19,30 @@ export const dateFormat = (date: Date | string | number | null | undefined, date
     date = parseISO(date);
   }
   return format(date, dateFormat);
+}
+
+export const parseErrors = (errors: FieldErrors | Record<string, {message: string}>) => {
+  const inputs = Object.keys(errors);
+  const errorMessages = inputs.reduce<Record<string, string>>((allErrors, errorKey) => {
+    return Object.assign(allErrors, {
+      [errorKey]: errors[errorKey]?.message}
+    );
+  }, {});
+
+  return {
+    isValid: inputs.length === 0,
+    errors: errorMessages,
+  }
+}
+
+export const joinErrors = (...errors: any) => {
+  let err: String[] = [];
+  errors.forEach((item: any) => {
+    if (Array.isArray(item)) {
+      err = err.concat(item);
+    } else if(typeof item === 'string' || item instanceof String) {
+      err.push(item);
+    }
+  });
+  return err;
 }

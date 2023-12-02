@@ -1,25 +1,50 @@
 "use client"
 
-import React, {FormEventHandler, useState} from "react";
+import React, {useState} from "react";
 import {Input, InputGroup} from "@/app/components/Inputs";
 import {Button} from "@/app/components/Buttons";
 import {ApiError, FormResult, UserType} from "@/app/types";
 import {Alert, AlertVariant} from "@/app/components/Alert";
 import {API_URL} from "@/app/utility/constants";
+import {useForm} from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import {parseErrors} from "@/app/utility/helpers";
+
+const schema = z.object({
+  name: z.string().min(1, 'Name is required').max(50),
+  username: z.string().trim().min(3).max(50).regex(/^[a-zA-Z0-9_.]+$/, 'Username should only alpha numeric character'),
+  email: z.string().email(),
+});
 
 interface AccountFormProps {
   user: UserType
 }
 export const AccountForm = ({user}: AccountFormProps) => {
-  const [name, setName] = useState(user.name);
-  const [username, setUsername] = useState(user.username);
-  const [email, setEmail] = useState(user.email);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [result, setResult] = useState<FormResult | null>(null);
-  const errors = result?.response?.errors as ApiError;
+  let errors = result?.response?.errors as ApiError;
 
-  const onSubmit: FormEventHandler = async (e) => {
-    e.preventDefault();
+  const {
+    register,
+    formState: { errors: fieldErrors },
+    handleSubmit
+  } = useForm({
+    mode: "onChange",
+    resolver: zodResolver(schema),
+    defaultValues: {
+      name: user.name,
+      username: user.username,
+      email: user.email,
+    },
+    disabled: !isSubmitting,
+  });
+
+  const validationErrors = parseErrors(fieldErrors);
+  if (!validationErrors.isValid && !errors) {
+    errors = validationErrors.errors;
+  }
+  const onSubmit = handleSubmit(async (formData) => {
     try {
       setIsSubmitting(true);
       setResult(null);
@@ -28,11 +53,7 @@ export const AccountForm = ({user}: AccountFormProps) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          name,
-          username,
-          email
-        }),
+        body: JSON.stringify(formData),
         credentials: "include",
       });
       const result = await response.json();
@@ -57,7 +78,7 @@ export const AccountForm = ({user}: AccountFormProps) => {
       setIsSubmitting(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }
+  });
 
   return (
     <>
@@ -74,8 +95,7 @@ export const AccountForm = ({user}: AccountFormProps) => {
             label="Name"
             placeholder="Your name"
             id="name"
-            value={name}
-            onChange={e => setName(e.target.value)}
+            {...register('name', {required: true})}
             errors={errors?.name}
           />
           <div className="display-grid col-md-2 column-gap-1">
@@ -83,8 +103,7 @@ export const AccountForm = ({user}: AccountFormProps) => {
               label="Username"
               placeholder="Unique ID for login"
               id="username"
-              value={username}
-              onChange={e => setUsername(e.target.value)}
+              {...register('username', {required: true})}
               errors={errors?.username}
             />
             <Input
@@ -92,8 +111,7 @@ export const AccountForm = ({user}: AccountFormProps) => {
               label="Email Address"
               placeholder="Email that used to login"
               id="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              {...register('email')}
               errors={errors?.email}
             />
           </div>
