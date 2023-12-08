@@ -41,7 +41,9 @@ export const joinErrors = (...errors: any) => {
     if (Array.isArray(item)) {
       err = err.concat(item);
     } else if(typeof item === 'string' || item instanceof String) {
-      err.push(item);
+      if (item !== '') {
+        err.push(item);
+      }
     }
   });
   return err;

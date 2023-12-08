@@ -4,11 +4,17 @@ import {clsx} from "clsx";
 import {ResetPasswordForm} from "@/app/(auth)/reset-password/components/ResetPasswordForm";
 import {decodeResetToken} from "@/app/actions/password";
 import React from "react";
+import {Metadata} from "next";
 
 type Props = {
   params: {};
   searchParams: { token: string };
 };
+
+export const metadata: Metadata = {
+  title: 'Reset password',
+  description: 'Reset your password',
+}
 
 export default async function ResetPassword({searchParams}: Props) {
   let user, errorMessage;

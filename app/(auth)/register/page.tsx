@@ -5,8 +5,14 @@ import {InputGroup} from "@/app/components/Inputs";
 import Image from "next/image";
 import {RegisterForm} from "@/app/(auth)/register/components/RegisterForm";
 import {Button} from "@/app/components/Buttons";
+import {Metadata} from "next";
 
-export default async function Login() {
+export const metadata: Metadata = {
+  title: 'Register',
+  description: 'Register your new account',
+}
+
+export default async function Register() {
   return (
     <main className={clsx('main', styles.auth__main)}>
       <div className={styles.auth__wrapper}>

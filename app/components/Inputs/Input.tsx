@@ -20,20 +20,22 @@ export interface InputProps extends InputHTMLAttributes<FormControlElement>, Tex
   errors?: ApiError | null | string | string[],
   errorKey?: string,
 }
-export const Input = React.forwardRef(({as: Component = 'input', label, inputSize, icon, borderless = false, errors, errorKey, ...rest}: InputProps, ref: ForwardedRef<any>) => {
+export const Input = React.forwardRef(({as: Component = 'input', label, name, required, inputSize, icon, borderless = false, errors, errorKey, ...rest}: InputProps, ref: ForwardedRef<any>) => {
   const formContext = useFormContext();
-  const {ref: inputRef, ...inputRest} = formContext ? formContext.register(rest.name || '') : {ref: null};
-  const inputErrors = joinErrors((formContext ? formContext.formState.errors[rest?.name || '']?.message : '') as string, errors);
+  const {ref: inputRef, ...inputRest} = formContext ? formContext.register(name || '', {required}) : {ref: null, required: false};
+  const inputErrors = joinErrors((formContext ? formContext.formState.errors[name || '']?.message : '') as string, errorKey && errors ? errors[errorKey as any] : errors);
 
   useImperativeHandle(inputRef, () => ref);
 
   return (
     <InputGroup>
-      {label && <label htmlFor={rest.id} className={styles.form__label}>{label}</label>}
-      {icon && <label className={clsx(icon, styles.form__inputIcon, styles[`icon__${inputSize}`])} htmlFor={rest.id}></label>}
+      {label && <label htmlFor={rest.id || name} className={styles.form__label}>{label}</label>}
+      {icon && <label className={clsx(icon, styles.form__inputIcon, styles[`icon__${inputSize}`])} htmlFor={rest.id || name}></label>}
       <Component
         ref={inputRef || ref}
         className={clsx(styles.form__input, inputSize && styles[`input__${inputSize}`], borderless && styles.form_inputBorderless)}
+        name={name}
+        id={rest.id || name}
         {...rest}
         {...inputRest}
       />

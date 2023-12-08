@@ -13,8 +13,10 @@ interface FormProps extends UseFormProps {
   form?: UseFormReturn;
   schema?: ZodType<any, any, any>;
   onSubmit?: FormSubmitHandler<any>;
+  className?: string;
+  noValidate?: boolean;
 }
-export const Form = ({form, schema, defaultValues = {}, values, children, disabled, onSubmit}: PropsWithChildren<FormProps>) => {
+export const Form = ({form, schema, defaultValues = {}, values, children, disabled, onSubmit, className, noValidate = true}: PropsWithChildren<FormProps>) => {
   const methods = form || useForm<typeof defaultValues>({
     mode: "onChange",
     resolver: schema && zodResolver(schema),
@@ -27,7 +29,7 @@ export const Form = ({form, schema, defaultValues = {}, values, children, disabl
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit((data, event) => {
         onSubmit && onSubmit(data, methods, event);
-      })} noValidate>
+      })} className={className} noValidate={noValidate}>
         {children}
       </form>
     </FormProvider>

@@ -2,6 +2,12 @@ import Link from "next/link";
 import styles from '../page.module.css';
 import {clsx} from "clsx";
 import {ForgotPasswordForm} from "@/app/(auth)/forgot-password/components/ForgotPasswordForm";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: 'Forgot password',
+  description: 'Reset your password',
+}
 
 export default async function ForgotPassword() {
   return (

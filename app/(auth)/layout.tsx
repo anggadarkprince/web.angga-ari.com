@@ -1,7 +1,7 @@
 import '../(site)/globals.css'
 
 export const metadata = {
-  title: 'Auth Page',
+  title: 'Authentication',
   description: 'Sign in to your account',
 }
 

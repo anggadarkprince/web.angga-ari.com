@@ -37,7 +37,7 @@ export const AccountForm = ({user}: AccountFormProps) => {
       username: user.username,
       email: user.email,
     },
-    disabled: !isSubmitting,
+    disabled: isSubmitting,
   });
 
   const validationErrors = parseErrors(fieldErrors);
@@ -50,9 +50,7 @@ export const AccountForm = ({user}: AccountFormProps) => {
       setResult(null);
       const response = await fetch(`${API_URL}users/${user.id}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(formData),
         credentials: "include",
       });
@@ -90,35 +88,33 @@ export const AccountForm = ({user}: AccountFormProps) => {
       )}
 
       <form method="post" onSubmit={onSubmit}>
-        <fieldset disabled={isSubmitting}>
+        <Input
+          label="Name"
+          placeholder="Your name"
+          id="name"
+          {...register('name', {required: true})}
+          errors={errors?.name}
+        />
+        <div className="display-grid col-md-2 column-gap-1">
           <Input
-            label="Name"
-            placeholder="Your name"
-            id="name"
-            {...register('name', {required: true})}
-            errors={errors?.name}
+            label="Username"
+            placeholder="Unique ID for login"
+            id="username"
+            {...register('username', {required: true})}
+            errors={errors?.username}
           />
-          <div className="display-grid col-md-2 column-gap-1">
-            <Input
-              label="Username"
-              placeholder="Unique ID for login"
-              id="username"
-              {...register('username', {required: true})}
-              errors={errors?.username}
-            />
-            <Input
-              type="email"
-              label="Email Address"
-              placeholder="Email that used to login"
-              id="email"
-              {...register('email')}
-              errors={errors?.email}
-            />
-          </div>
-          <InputGroup className="text-right">
-            <Button type="submit" disabled={isSubmitting}>Update Profile</Button>
-          </InputGroup>
-        </fieldset>
+          <Input
+            type="email"
+            label="Email Address"
+            placeholder="Email that used to login"
+            id="email"
+            {...register('email')}
+            errors={errors?.email}
+          />
+        </div>
+        <InputGroup className="text-right">
+          <Button type="submit" disabled={isSubmitting}>Update Profile</Button>
+        </InputGroup>
       </form>
     </>
   )
