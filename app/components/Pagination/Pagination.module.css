@@ -1,0 +1,24 @@
+.pagination {
+    margin-bottom: 10px;
+    display: flex;
+}
+.pagination__item {
+    list-style: none;
+}
+.pagination__item.active .pagination__link {
+    background: var(--primary-color);
+    color: #fff;
+}
+.pagination__item.disabled .pagination__link {
+    color: var(--text-color-light);
+    pointer-events: none;
+}
+.pagination__item:not(.active):not(.disabled) .pagination__link:hover {
+    background: var(--container-color-lighter);
+}
+.pagination__link {
+    border-radius: 0.3rem;
+    padding: .2rem .55rem;
+    display: block;
+    color: var(--text-color);
+}

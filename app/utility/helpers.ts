@@ -48,3 +48,11 @@ export const joinErrors = (...errors: any) => {
   });
   return err;
 }
+
+export const filterToParam = (params: URLSearchParams, filters: Record<string, any>, key: string) => {
+  if (filters[key] || undefined) {
+    params.set(key, filters[key]);
+  } else {
+    params.delete(key);
+  }
+}

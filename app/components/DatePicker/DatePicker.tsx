@@ -2,13 +2,14 @@ import {ChangeEventHandler, forwardRef, HTMLProps, Ref, useState} from "react";
 import ReactDatePicker, {ReactDatePickerProps} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.css";
-import {parseISO, setDefaultOptions} from "date-fns";
+import {parseISO} from "date-fns";
 import {Input} from "@/app/components/Inputs";
 import {InputProps} from "@/app/components/Inputs/Input";
-import * as React from "react";
+import React from "react";
 import {dateFormat as formatter} from "@/app/utility/helpers";
 import {ApiError} from "@/app/types";
 import {clsx} from "clsx";
+import {Controller, useFormContext} from "react-hook-form";
 
 interface DatePickerProps extends Omit<ReactDatePickerProps, 'onChange' | 'value'> {
   value?: string | Date | null;
@@ -34,6 +35,7 @@ export const DatePicker = forwardRef(({
    placeholder,
    label,
    id,
+   name,
    errors,
    onChange,
    onDateChange,
@@ -43,6 +45,7 @@ export const DatePicker = forwardRef(({
   //const defaultValueDate = defaultValue ? (defaultValue instanceof Date ? defaultValue : parseISO(defaultValue)) : null;
   const valueDate = value ? (value instanceof Date ? value : parseISO(value)) : (selected ? selected : null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(valueDate);
+  const {control} = useFormContext() || {control: null};
 
   const DateInput = forwardRef(({value: updatedValue, onClick}: HTMLProps<HTMLInputElement>, ref: Ref<InputProps>) => {
     const valueAttributes: InputProps = {}
@@ -54,14 +57,17 @@ export const DatePicker = forwardRef(({
       //valueAttributes.defaultValue = formatter(updatedValue as string, format) || '';
       valueAttributes.defaultValue = defaultValue as string;
     }
+    if (control && !valueAttributes.value && !valueAttributes.defaultValue) {
+        valueAttributes.value = updatedValue;
+    }
     return (
       <Input
-        ref={ref}
         required={required}
         placeholder={placeholder}
         onClick={onClick}
         label={label}
         id={id}
+        name={name}
         onChange={onChange}
         errors={errors}
         {...valueAttributes}
@@ -85,27 +91,47 @@ export const DatePicker = forwardRef(({
     }
   }
 
+  const renderDatePicker = (dateValue: Date | null, onInputChange?: (date: string) => void) => {
+      return (
+          <ReactDatePicker
+              ref={ref}
+              selected={dateValue}
+              onChange={(date, e) => {
+                  if (onInputChange) {
+                      const format = (Array.isArray(dateFormat) ? dateFormat[0] : dateFormat) || 'yyyy-MM-dd';
+                      onInputChange(formatter(date, format) || '');
+                  }
+                  setSelectedDate(date);
+                  if (onDateChange) {
+                      onDateChange(date, e);
+                  }
+                  if (onChange) {
+                      triggerChange(date);
+                  }
+              }}
+              customInput={<DateInput />}
+              dateFormat={dateFormat}
+              popperClassName={"datepicker"}
+              clearButtonClassName={clsx("datepicker-clear-button", label && 'with-label')}
+              {...rest}
+          />
+      )
+  }
+
+  if (!control) {
+      return renderDatePicker(selected || selectedDate || valueDate);
+  }
+
   return (
-    <>
-      <ReactDatePicker
-        ref={ref}
-        selected={selected || selectedDate || valueDate}
-        onChange={(date, e) => {
-          setSelectedDate(date);
-          if (onDateChange) {
-            onDateChange(date, e);
-          }
-          if (onChange) {
-            triggerChange(date);
-          }
-        }}
-        customInput={<DateInput />}
-        dateFormat={dateFormat}
-        popperClassName={"datepicker"}
-        clearButtonClassName={clsx("datepicker-clear-button", label && 'with-label')}
-        {...rest}
+      <Controller
+          control={control}
+          name={name || ''}
+          render={({field}) => {
+              const fieldValue = field.value === '' ? null : (field.value instanceof Date ? field.value : parseISO(field.value)) ;
+              const dateValue = fieldValue || selected || selectedDate || valueDate;
+              return renderDatePicker(dateValue, field.onChange);
+          }}
       />
-    </>
   )
 });
 DatePicker.displayName = 'DatePicker';

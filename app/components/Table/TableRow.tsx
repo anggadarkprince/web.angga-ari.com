@@ -3,7 +3,7 @@ import {useTable} from "@/app/components/Table";
 
 type RenderFunction = (columnKey: string) => ReactNode;
 interface TableRowProps {
-  render: RenderFunction,
+  render?: RenderFunction,
   children?: ReactNode | RenderFunction
 }
 export const TableRow = ({render, children}: TableRowProps) => {

@@ -13,7 +13,7 @@ interface TableProps<T> {
   columns?: Array<{key: string, label: string}>,
   items?: Array<T>,
 }
-export const Table = ({size, bordered = true, responsive = true, children, columns: tableColumn, items: tableRows}: PropsWithChildren<TableProps<any>>) => {
+export const Table = ({size, bordered = true, responsive = true, children, columns: tableColumn, items: tableRows, className}: PropsWithChildren<TableProps<any>>) => {
   const [rows, setRows] = useState(tableRows || []);
   const [columns, setColumns] = useState<Array<{key: string, label: string}>>(tableColumn || []);
 
@@ -28,7 +28,8 @@ export const Table = ({size, bordered = true, responsive = true, children, colum
           styles.table,
           size && styles[`table__${size}`],
           bordered && styles.table__border,
-          responsive && styles.table__responsive
+          responsive && styles.table__responsive,
+          className
         )
       }>
         {children}

@@ -19,6 +19,7 @@
     "jose": "^5.0.1",
     "jsonwebtoken": "^9.0.2",
     "next": "^14.0.3",
+    "object-hash": "^3.0.0",
     "react": "^18.2.0",
     "react-datepicker": "^4.23.0",
     "react-dom": "^18.2.0",
@@ -31,6 +32,7 @@
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.4",
     "@types/node": "^20",
+    "@types/object-hash": "^3.0.6",
     "@types/react": "^18",
     "@types/react-datepicker": "^4.19.3",
     "@types/react-dom": "^18",

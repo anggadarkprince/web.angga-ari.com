@@ -43,3 +43,12 @@ export interface SettingType {
 
 export type VariantType = 'primary' | 'success' | 'danger' | 'error' | 'warning' | 'info' | 'white';
 export type SizeType = 'small' | 'medium' | 'large';
+
+export interface PaginationMetaType {
+  page: number;
+  limit: number;
+  total_item: number;
+  total_page: number;
+  has_prev: boolean;
+  has_next: boolean;
+}
