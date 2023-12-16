@@ -56,3 +56,5 @@ export const filterToParam = (params: URLSearchParams, filters: Record<string, a
     params.delete(key);
   }
 }
+
+export const truncate = (input: string, totalChars = 5) => input.length > totalChars ? `${input.substring(0, totalChars)}...` : input;

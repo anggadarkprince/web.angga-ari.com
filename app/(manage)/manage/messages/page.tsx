@@ -1,24 +1,21 @@
 import {PageTitle} from "@/app/(manage)/manage/components/Layouts/PageTitle";
 import {Button} from "@/app/components/Buttons";
 import {API_URL} from "@/app/utility/constants";
-import {cookies} from "next/headers";
-import {ContactType, PaginationMetaType} from "@/app/types";
 import {Pagination} from "@/app/components/Pagination";
 import {Metadata} from "next";
 import {Suspense} from "react";
-import {MessageTable} from "@/app/(manage)/manage/messages/components/MessageTable";
+import {MessageTable} from "@/app/(manage)/manage/messages/components/Contents/MessageTable";
 import {MessageContextProvider} from "@/app/(manage)/manage/messages/context/MessageContext";
-import {ButtonFilter} from "@/app/(manage)/manage/messages/components/ButtonFilter";
-import {ModalFilter} from "@/app/(manage)/manage/messages/components/ModalFilter";
+import {ButtonFilter} from "@/app/(manage)/manage/messages/components/Buttons/ButtonFilter";
+import {ModalFilter} from "@/app/(manage)/manage/messages/components/Modals/ModalFilter";
 import hash from "object-hash";
+import {fetchAllMessages} from "@/app/services/messages";
+import {ModalDelete} from "@/app/(manage)/manage/messages/components/Modals/ModalDelete";
+import {ModalReply} from "@/app/(manage)/manage/messages/components/Modals/ModalReply";
 
 export const metadata: Metadata = {
     title: 'Contact messages',
 };
-export interface ContactResponse {
-    data: ContactType[];
-    meta: PaginationMetaType;
-}
 interface PageProps {
     params: Record<string, string | undefined>;
     searchParams: {
@@ -31,20 +28,12 @@ interface PageProps {
     };
 }
 export default async function Messages({searchParams}: PageProps) {
-    const token = cookies().get("access_token");
     const filters = {
         page: searchParams.page || '1',
         limit: searchParams.limit || '10',
         ...searchParams,
     }
-    const response = await fetch(`${API_URL}contacts?${new URLSearchParams(filters)}`, {
-        headers: {
-            Accept: "application/json",
-            Cookie: `access_token=${token?.value}`
-        },
-        credentials: "include",
-    });
-    const {data, meta}: ContactResponse = await response.json();
+    const {data, meta} = await fetchAllMessages(filters);
 
     return (
         <MessageContextProvider>
@@ -61,7 +50,9 @@ export default async function Messages({searchParams}: PageProps) {
                 <MessageTable data={data} meta={meta} />
             </Suspense>
             <Pagination totalPage={meta.total_page}/>
-            <ModalFilter />
+            <ModalFilter/>
+            <ModalDelete/>
+            <ModalReply/>
         </MessageContextProvider>
     )
 }

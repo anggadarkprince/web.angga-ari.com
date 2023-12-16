@@ -27,7 +27,7 @@ export const DropdownItem = ({title, icon, href, onClick, className, style, chil
 
   const content = children ? children : (
     <>
-      {icon && <i className={clsx(icon, title && 'mr-0-25')}></i>}
+      {icon && <i className={clsx(icon, title && 'mr-0-5')}></i>}
       {title}
     </>
   );

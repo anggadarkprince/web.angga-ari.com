@@ -9,7 +9,6 @@ import {parseISO} from "date-fns";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {Form, FormSubmitHandler} from "@/app/components/Form/Form";
 import {useMessagePage} from "@/app/(manage)/manage/messages/context/MessageContext";
-import {de} from "date-fns/locale";
 import {dateFormat, filterToParam} from "@/app/utility/helpers";
 
 export const ModalFilter = () => {

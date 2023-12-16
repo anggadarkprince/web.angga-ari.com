@@ -1,7 +1,17 @@
 import {Label} from "@/app/components/Label";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "@/app/components/Dropdowns";
 import {Table} from "@/app/components/Table";
-import {ContactResponse} from "@/app/(manage)/manage/messages/page";
+import {ContactResponse} from "@/app/services/messages";
+import {truncate} from "@/app/utility/helpers";
+import {ButtonDelete} from "@/app/(manage)/manage/messages/components/Buttons/ButtonDelete";
+import {ButtonReply} from "@/app/(manage)/manage/messages/components/Buttons/ButtonReply";
+
+enum StatusClass {
+    'PENDING' = 'white',
+    'REPLIED' = 'success',
+    'REJECTED' = 'error',
+    'HOLD' = 'warning',
+}
 
 export const MessageTable = ({data, meta}: ContactResponse) => {
     return (
@@ -26,17 +36,17 @@ export const MessageTable = ({data, meta}: ContactResponse) => {
                             <td>{contact.name}</td>
                             <td>{contact.email}</td>
                             <td>{contact.project}</td>
-                            <td>{contact.message}</td>
-                            <td><Label variant={"white"}>{contact.status}</Label></td>
+                            <td>{truncate(contact.message, 20)}</td>
+                            <td><Label variant={StatusClass[contact.status as keyof typeof StatusClass]}>{contact.status}</Label></td>
                             <td className="text-right">
                                 <Dropdown>
                                     <DropdownToggle variant={"primary"} size={"small"}>
                                         Action
                                     </DropdownToggle>
                                     <DropdownMenu positionRight={true}>
-                                        <DropdownItem icon="uil-search" title="View"/>
-                                        <DropdownItem icon="uil-envelope-upload" title="Edit"/>
-                                        <DropdownItem icon="uil-trash" title="Delete"/>
+                                        <DropdownItem href={`messages/${contact.id}`} icon="uil-search" title="View"/>
+                                        <ButtonReply message={contact}/>
+                                        <ButtonDelete message={contact}/>
                                     </DropdownMenu>
                                 </Dropdown>
                             </td>
