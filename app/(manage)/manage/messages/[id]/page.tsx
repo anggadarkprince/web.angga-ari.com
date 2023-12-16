@@ -3,6 +3,7 @@ import {ContactType, fetchMessage} from "@/app/services/messages";
 import {PageTitle} from "@/app/(manage)/manage/components/Layouts/PageTitle";
 import {BackButton} from "@/app/(manage)/manage/components/Buttons/BackButton";
 import {dateFormat} from "@/app/utility/helpers";
+import {MessageStatus} from "@/app/(manage)/manage/messages/components/Contents/MessageStatus";
 
 interface ViewMessageProps {
     params: {id: number}
@@ -36,7 +37,7 @@ export default async function ViewMessage({params}: ViewMessageProps) {
                     </div>
                     <div className={'display-grid col-2-4'}>
                         <p className={'text-fw-strong'}>Status</p>
-                        <p>{message.status}</p>
+                        <p><MessageStatus status={message.status} /></p>
                     </div>
                     <div className={'display-grid col-2-4'}>
                         <p className={'text-fw-strong'}>Created At</p>

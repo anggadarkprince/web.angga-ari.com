@@ -8,6 +8,12 @@ import {useRouter} from "next/navigation";
 import {Form, FormSubmitHandler} from "@/app/components/Form/Form";
 import {useMessagePage} from "@/app/(manage)/manage/messages/context/MessageContext";
 import {replyMessage} from "@/app/services/messages";
+import * as z from "zod";
+
+const schema = z.object({
+  subject: z.string().trim().min(1, 'Subject is required').max(100),
+  message: z.string().trim().min(10).max(500),
+});
 
 export const ModalReply = () => {
   const {showReply, setShowReply, selectedMessage} = useMessagePage();
@@ -29,7 +35,7 @@ export const ModalReply = () => {
 
   return (
     <Modal show={showReply}>
-      <Form onSubmit={onSubmit} defaultValues={defaultValues}>
+      <Form onSubmit={onSubmit} defaultValues={defaultValues} schema={schema}>
         <ModalHeader title="Submit Reply" icon={"uil-envelope-upload"} onClose={onClose}/>
         <ModalBody>
           <Input

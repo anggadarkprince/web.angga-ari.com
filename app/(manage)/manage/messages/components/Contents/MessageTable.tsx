@@ -5,13 +5,7 @@ import {ContactResponse} from "@/app/services/messages";
 import {truncate} from "@/app/utility/helpers";
 import {ButtonDelete} from "@/app/(manage)/manage/messages/components/Buttons/ButtonDelete";
 import {ButtonReply} from "@/app/(manage)/manage/messages/components/Buttons/ButtonReply";
-
-enum StatusClass {
-    'PENDING' = 'white',
-    'REPLIED' = 'success',
-    'REJECTED' = 'error',
-    'HOLD' = 'warning',
-}
+import {MessageStatus} from "@/app/(manage)/manage/messages/components/Contents/MessageStatus";
 
 export const MessageTable = ({data, meta}: ContactResponse) => {
     return (
@@ -37,7 +31,7 @@ export const MessageTable = ({data, meta}: ContactResponse) => {
                             <td>{contact.email}</td>
                             <td>{contact.project}</td>
                             <td>{truncate(contact.message, 20)}</td>
-                            <td><Label variant={StatusClass[contact.status as keyof typeof StatusClass]}>{contact.status}</Label></td>
+                            <td><MessageStatus status={contact.status} /></td>
                             <td className="text-right">
                                 <Dropdown>
                                     <DropdownToggle variant={"primary"} size={"small"}>

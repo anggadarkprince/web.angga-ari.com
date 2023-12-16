@@ -17,7 +17,7 @@ export const fetchAllMessages = async (filters: Record<string, string>) => {
     const response = await fetch(`${API_URL}contacts?${new URLSearchParams(filters)}`, {
         headers: {
             Accept: "application/json",
-            Cookie: `access_token=${cookies().get("access_token")?.value}`
+            Authorization: `Bearer ${cookies().get("access_token")?.value}`
         },
         credentials: "include",
     });
@@ -28,7 +28,7 @@ export const fetchMessage = async (id: number) => {
     const response = await fetch(`${API_URL}contacts/${id}`, {
         headers: {
             Accept: "application/json",
-            Cookie: `access_token=${cookies().get("access_token")?.value}`
+            Authorization: `Bearer ${cookies().get("access_token")?.value}`
         },
         credentials: "include",
     });
@@ -43,7 +43,35 @@ export const replyMessage = async (id: number, data: {subject: string; message: 
         headers: {
             Accept: "application/json",
             'Content-Type': "application/json",
-            Cookie: `access_token=${cookies().get("access_token")?.value}`
+            Authorization: `Bearer ${cookies().get("access_token")?.value}`
+        },
+        credentials: "include",
+    });
+    const result = await response.json();
+    return result.data as ContactType;
+}
+
+export const rejectMessage = async (id: number) => {
+    const response = await fetch(`${API_URL}contacts/${id}/reject`, {
+        method: 'PATCH',
+        headers: {
+            Accept: "application/json",
+            'Content-Type': "application/json",
+            Authorization: `Bearer ${cookies().get("access_token")?.value}`
+        },
+        credentials: "include",
+    });
+    const result = await response.json();
+    return result.data as ContactType;
+}
+
+export const holdMessage = async (id: number) => {
+    const response = await fetch(`${API_URL}contacts/${id}/hold`, {
+        method: 'PATCH',
+        headers: {
+            Accept: "application/json",
+            'Content-Type': "application/json",
+            Authorization: `Bearer ${cookies().get("access_token")?.value}`
         },
         credentials: "include",
     });
